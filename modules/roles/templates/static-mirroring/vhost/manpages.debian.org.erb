@@ -13,6 +13,11 @@
 	RewriteMap manpagesall dbm:/srv/static.debian.org/mirrors/manpages.debian.org/cur/rwmap.dbm
 	RewriteMap lc int:tolower
 
+	# Redirect old CGI paths (without CGI file name), keeping at least the
+	# manpage (the other parameters are left out for simplicity).
+	RewriteCond %{QUERY_STRING} (?:.*(?:^|&))query=([^&]+)
+	RewriteRule ^/?$ /%1 [redirect=307,qsdiscard,last]
+
 	# URLs which end in a slash do not need to be rewritten
 	RewriteRule /$ - [last]
 
