@@ -1,0 +1,41 @@
+#!/usr/bin/expect -f
+
+if {[llength $argv] != 4} {
+    puts stderr "Usage: $argv0 certdir token cert filename"
+    exit 2
+}
+
+lassign $argv certdir token cert filename
+
+set pin $::env(PESIGN_PIN)
+
+file tempfile output efi.sig
+
+log_user 0
+spawn pesign --certdir "$certdir" -t "$token" -c "$cert" --sign -d sha256 -i "$filename" --export-signature "$output" --force
+expect {
+	"Enter Password *:" {
+		send "$pin\n"
+		exp_continue
+	}
+	"Enter passphrase *:" {
+		send "$pin\n"
+		exp_continue
+	}
+	timeout {close}
+}
+lassign [wait] wait_pid spawn_id exec_rc wait_code childkilled
+# couldn't exec pesign
+if {$exec_rc != 0} {
+	file delete $output
+	exit 1
+}
+# killed by signal (e.g. timeout)
+if {$childkilled == "CHILDKILLED"} {
+	file delete $output
+	exit 1
+}
+# all good?
+if {$wait_code == 0} {system cat $output}
+file delete $output
+exit $wait_code

@@ -76,6 +76,7 @@ class roles {
 	if has_role('ftp_master') {
 		include roles::ftp_master
 		include roles::dakmaster
+		include roles::signing
 	}
 	if has_role('ftp.upload.d.o') {
 		include roles::ftp_upload
