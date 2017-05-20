@@ -26,6 +26,7 @@
 
     SSLStaplingCache shmcb:${APACHE_RUN_DIR}/ssl_stapling(1048576)
     SSLStaplingReturnResponderErrors off
+    SSLStaplingFakeTryLater off
   <% end -%>
 </IfModule>
 
