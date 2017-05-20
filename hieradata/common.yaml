@@ -45,6 +45,8 @@ roles:
     - cgi-grnet-01.debian.org
   git_master:
     - adayevskaya.debian.org
+  historicalpackages:
+    - hier.debian.org
   httpredir:
     - httpredir-bm-01.debian.org
     - httpredir-csail-01.debian.org

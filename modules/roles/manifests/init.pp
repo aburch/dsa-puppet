@@ -244,6 +244,10 @@ class roles {
 		ssl::service { 'packages.debian.org': notify  => Exec['service apache2 reload'], key => true, }
 	}
 
+	if has_role('historicalpackages') {
+		ssl::service { 'historical.packages.debian.org': notify  => Exec['service apache2 reload'], key => true, }
+	}
+
 	if has_role('qamaster') {
 		ssl::service { 'qa.debian.org': notify  => Exec['service apache2 reload'], key => true, }
 	}
