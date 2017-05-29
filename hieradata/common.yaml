@@ -49,7 +49,6 @@ roles:
     - hier.debian.org
   httpredir:
     - httpredir-bm-01.debian.org
-    - httpredir-csail-01.debian.org
   jenkins:
     - jerea.debian.org
   keyring:
