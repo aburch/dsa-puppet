@@ -48,7 +48,7 @@ roles:
   historicalpackages:
     - hier.debian.org
   httpredir:
-    - httpredir-bm-01.debian.org
+    - dummy
   jenkins:
     - jerea.debian.org
   keyring:
