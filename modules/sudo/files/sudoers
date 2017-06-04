@@ -119,8 +119,6 @@ nagios		storace=(debbackup)	NOPASSWD: /usr/lib/nagios/plugins/dsa-check-backuppg
 %gitdoadm	ALL=(gitdoadm)	ALL
 # the git user also exists on adayevskaya where it's a different service..
 %gitdoadm	gigault=(git)	ALL
-%httpredir	ALL=(httpredir)	ALL
-%httpredir	ALL=(httpredir-app)	ALL
 %keyring	ALL=(keyring)	ALL
 %jenkins-adm	ALL=(jenkins-adm)	ALL
 %lintian	ALL=(lintian)	ALL
@@ -164,9 +162,6 @@ nagios		storace=(debbackup)	NOPASSWD: /usr/lib/nagios/plugins/dsa-check-backuppg
 dak		ALL=(dak-unpriv)	NOPASSWD: ALL
 # and ftpmaster can access the role user for their web services
 %debadmin	FTPHOSTS=(dak-web)	ALL
-
-# the httpredir role use can run things as httpredir-app
-httpredir	ALL=(httpredir-app)	NOPASSWD: ALL
 
 # some groups are in apachectrl on "their" hosts so they can reload apache and update their vhost
 %apachectrl	ALL=(root)	/usr/sbin/apache2-vhost-update

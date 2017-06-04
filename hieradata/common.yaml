@@ -47,8 +47,6 @@ roles:
     - adayevskaya.debian.org
   historicalpackages:
     - hier.debian.org
-  httpredir:
-    - dummy
   jenkins:
     - jerea.debian.org
   keyring:

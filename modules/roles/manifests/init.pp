@@ -285,10 +285,6 @@ class roles {
 		ssl::service { 'sreview.debian.net': notify  => Exec['service apache2 reload'], key => true, }
 	}
 
-	if has_role('httpredir') {
-		include roles::httpredir
-	}
-
 	if has_role('debtags') {
 		include roles::debtags
 	}
