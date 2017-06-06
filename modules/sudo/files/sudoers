@@ -243,6 +243,7 @@ debwww		WEBHOSTS=(archvsync)	NOPASSWD: /home/archvsync/webmirrors/runmirrors
 %publicity	WEBHOSTS=(debwww)	/srv/www.debian.org/update-part News
 %debvote	WEBHOSTS=(debwww)	/srv/www.debian.org/update-part vote
 %d-i		WEBHOSTS=(debwww)	/srv/www.debian.org/update-part devel/debian-installer
+%d-i		WEBHOSTS=(debwww)	/srv/www.debian.org/cron/lessoften-parts/1installation-guide
 # more list stuff
 %list		LISTHOSTS=(root)		/usr/sbin/postfix reload
 %list		stockhausen=(root)		/usr/sbin/service jetty restart
