@@ -337,25 +337,9 @@ Use common-dsa-vhost-https-redirect archive.debian.net
 	ServerAdmin debian-admin@debian.org
 	ErrorLog /var/log/apache2/archive.debian.net-error.log
 	CustomLog /var/log/apache2/archive.debian.net-access.log privacyssl
-
 	Use common-debian-service-ssl archive.debian.net
 	Use common-ssl-HSTS
-
-	<IfModule mod_userdir.c>
-		UserDir disabled
-	</IfModule>
-	ServerSignature On
-
-	DocumentRoot /srv/static.debian.org/puppet/archive.debian.net
-	<Directory /srv/static.debian.org/puppet/archive.debian.net>
-		AllowOverride FileInfo Indexes Options=Multiviews
-		Options Indexes SymLinksIfOwnerMatch
-		Require all granted
-	</Directory>
-
-	RedirectMatch 503 ^/(?!503\.html)
-	ErrorDocument 503 /503.html
-	Header always set Retry-After "18000"
+	Use common-disabled-service
 </VirtualHost>
 
 

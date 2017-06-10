@@ -97,6 +97,10 @@ class apache2 {
 		source => 'puppet:///modules/apache2/headers',
 	}
 
+	apache2::config { 'disabled-service':
+		source => 'puppet:///modules/apache2/disabled-service',
+	}
+
 	apache2::module { 'mpm_event': ensure => absent }
 	if has_role('apache_prefork') {
 		apache2::module { 'mpm_worker': ensure => absent }

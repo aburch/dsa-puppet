@@ -1,0 +1,18 @@
+<IfModule mod_macro.c>
+  <Macro common-disabled-service>
+    <IfModule mod_userdir.c>
+      UserDir disabled
+    </IfModule>
+    DocumentRoot /srv/static.debian.org/puppet/disabled-service
+    <Directory /srv/static.debian.org/puppet/disabled-service>
+      AllowOverride FileInfo Indexes Options=Multiviews
+      Options Indexes SymLinksIfOwnerMatch
+      Require all granted
+    </Directory>
+    RedirectMatch 503 ^/(?!503\.html)
+    ErrorDocument 503 /503.html
+    <IfModule mod_headers.c>
+      Header always set Retry-After "18000"
+    </IfModule>
+  </Macro>
+</IfModule>
