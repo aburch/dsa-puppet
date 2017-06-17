@@ -125,7 +125,7 @@ class LastlogTimes(dict):
     record_size_64 = struct.calcsize(self.LASTLOG_STRUCT_64)
     # some 64bit arches have 32bit-compatible lastlog structures, others don't,
     # in apparently incoherent ways, so hardcode a list...
-    if platform.machine() in ('ia64', 'aarch64', 's390x'):
+    if platform.machine() in ('aarch64', 's390x'):
         self.LASTLOG_STRUCT = self.LASTLOG_STRUCT_64
         record_size = record_size_64
     else:

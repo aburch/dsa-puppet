@@ -58,8 +58,6 @@ get_suites() {
       ppc64)
         echo "sid"
         ;;
-      ia64)
-	;;
       *)
         echo "sid buster stretch jessie"
         ;;
