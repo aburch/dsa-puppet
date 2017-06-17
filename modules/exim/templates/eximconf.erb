@@ -1471,12 +1471,12 @@ bugs:
   transport = bugs_pipe
   domains = ' + domain + '
   cannot_route_message = Unknown or archived bug
-  require_files = /org/bugs.debian.org/mail/run-procmail
+  require_files = /srv/bugs.debian.org/mail/run-procmail
   no_more
   local_parts = ${if match\
                   {$local_part}\
                   {\N^(\d+)(\d{2})(?:-(?:(?:submit|maintonly|quiet|forwarded|done|close|request|submitter)|(?:unsubscribe|ignore|help|(?:sub(?:scribe|help|yes|approve|reject))|unsubyes|bounce|probe|approve|reject|setlistyes|setlistsilentyes).*))?$\N}\
-               {${if exists{/org/bugs.debian.org/spool/db-h/$2/$1$2.summary}\
+               {${if exists{/srv/bugs.debian.org/spool/db-h/$2/$1$2.summary}\
 	       {$local_part}fail}}fail}
 '
 end
@@ -1615,7 +1615,7 @@ bsmtp:
 <%- if @is_bugsmaster or @is_bugsmx -%>
 bugs_pipe:
   driver = pipe
-  command = /org/bugs.debian.org/mail/run-procmail
+  command = /srv/bugs.debian.org/mail/run-procmail
   environment = "EXTENSION=${substr_1:${local_part_suffix}}:\
                  EXT=${substr_1:${local_part_suffix}}:\
                  LOCAL=${local_part}${local_part_suffix}:\
