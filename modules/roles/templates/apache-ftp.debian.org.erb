@@ -13,6 +13,8 @@
 	ServerAlias debian.backend.mirrors.debian.org
 	ServerAlias *.debian.backend.mirrors.debian.org
 
+	AddCharset UTF-8 .txt
+
 	RedirectMatch "^/$" /debian/
 	Alias /debian/ <%= @archive_root %>/
 
