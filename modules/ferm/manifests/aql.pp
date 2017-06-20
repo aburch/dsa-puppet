@@ -4,7 +4,7 @@ class ferm::aql {
 		description => 'drop multicast traffic to avoid triggering protection',
 		table       => 'filter',
 		chain       => 'OUTPUT',
-		rule        => 'destination 224.0.0.0/24 jump log_or_drop'
+		rule        => 'destination 224.0.0.0/4 jump log_or_drop'
 	}
 }
 
