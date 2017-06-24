@@ -27,7 +27,7 @@ storeconfigs_backend = puppetdb
 environments = development,testing,production,staging
 report = true
 <%- if has_variable?("puppetversion") and (scope.call_function('versioncmp', [@puppetversion.to_s, '4.1.0']) >= 0) -%>
-http_connect_timeout = 10
+http_connect_timeout = 20
 http_read_timeout = 240
 <%- else -%>
 configtimeout = 240
