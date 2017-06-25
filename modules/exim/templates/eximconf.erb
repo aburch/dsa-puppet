@@ -958,18 +958,24 @@ check_message:
 
 <%- if has_variable?("clamd") && @clamd -%>
   discard condition       = ${if eq {$acl_m_prf}{blackhole}}
+  <%- if scope.call_function('versioncmp', [@lsbmajdistrelease, '8']) <= 0 -%>
           demime          = *
+  <%- end -%>
           malware         = */defer_ok
           log_message     = discarded malware message for $recipients
 
   deny    condition       = ${if eq {$acl_m_prf}{markup}{no}{yes}}
           condition       = ${if eq {$acl_m_prf}{PopconMail}{no}{yes}}
+  <%- if scope.call_function('versioncmp', [@lsbmajdistrelease, '8']) <= 0 -%>
   	  demime          = *
+  <%- end -%>
           malware         = */defer_ok
           message         = malware detected: $malware_name: message rejected
 
   warn    condition       = ${if eq {$acl_m_prf}{markup}}
+  <%- if scope.call_function('versioncmp', [@lsbmajdistrelease, '8']) <= 0 -%>
   	  demime          = *
+  <%- end -%>
           malware         = */defer_ok
           message         = X-malware detected: $malware_name
 
