@@ -50,12 +50,18 @@ class buildd ($ensure=present) {
 			default => 'jessie'
 		}
 
-		site::aptrepo { 'buildd.debian.org':
-			key        => 'puppet:///modules/buildd/buildd.debian.org.gpg',
-			url        => 'https://apt.buildd.debian.org/',
-			suite      => $suite,
-			components => 'main',
-			require    => Package['apt-transport-https'],
+		if (versioncmp($::lsbmajdistrelease, '9') >= 0) {
+			site::aptrepo { 'buildd.debian.org':
+				ensure => absent,
+			}
+		} else {
+			site::aptrepo { 'buildd.debian.org':
+				key        => 'puppet:///modules/buildd/buildd.debian.org.gpg',
+				url        => 'https://apt.buildd.debian.org/',
+				suite      => $suite,
+				components => 'main',
+				require    => Package['apt-transport-https'],
+			}
 		}
 
 		file { '/etc/apt/apt.conf.d/puppet-https-buildd':
