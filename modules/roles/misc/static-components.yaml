@@ -60,6 +60,8 @@ components:
   incoming.ports.debian.org:
     master: porta.debian.org
     source: porta.debian.org:/srv/ports-master.debian.org/queue/accepted
+    exclude-mirrors:
+      - klecker.debian.org
   release.debian.org:
     master: dillon.debian.org
     source: respighi.debian.org:/srv/release.debian.org/www
