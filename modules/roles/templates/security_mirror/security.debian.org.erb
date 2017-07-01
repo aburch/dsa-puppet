@@ -34,18 +34,18 @@
    RewriteEngine on
    RewriteRule ^/$      https://www.debian.org/security/
 
-   RewriteCond %{HTTP:Fastly-Client-IP} !. [NV]
-   RewriteCond %{HTTP_USER_AGENT} "!Amazon CloudFront"
-   <% if scope.function_onion_global_service_hostname(['security.debian.org']) -%>
-   RewriteCond %{HTTP_HOST} "!=<%= scope.function_onion_global_service_hostname(['security.debian.org']) %>"
-   <% end %>
-   RewriteRule ^/(pool/updates/main/l/linux/.*) http://security-cdn.debian.org/$1 [L,R=302]
-   RewriteCond %{HTTP:Fastly-Client-IP} !. [NV]
-   RewriteCond %{HTTP_USER_AGENT} "!Amazon CloudFront"
-   <% if scope.function_onion_global_service_hostname(['security.debian.org']) -%>
-   RewriteCond %{HTTP_HOST} "!=<%= scope.function_onion_global_service_hostname(['security.debian.org']) %>"
-   <% end %>
-   RewriteRule ^/debian-security/(pool/updates/main/l/linux/.*) http://security-cdn.debian.org/$1 [L,R=302]
+   #RewriteCond %{HTTP:Fastly-Client-IP} !. [NV]
+   #RewriteCond %{HTTP_USER_AGENT} "!Amazon CloudFront"
+   #<% if scope.function_onion_global_service_hostname(['security.debian.org']) -%>
+   #RewriteCond %{HTTP_HOST} "!=<%= scope.function_onion_global_service_hostname(['security.debian.org']) %>"
+   #<% end %>
+   #RewriteRule ^/(pool/updates/main/l/linux/.*) http://security-cdn.debian.org/$1 [L,R=302]
+   #RewriteCond %{HTTP:Fastly-Client-IP} !. [NV]
+   #RewriteCond %{HTTP_USER_AGENT} "!Amazon CloudFront"
+   #<% if scope.function_onion_global_service_hostname(['security.debian.org']) -%>
+   #RewriteCond %{HTTP_HOST} "!=<%= scope.function_onion_global_service_hostname(['security.debian.org']) %>"
+   #<% end %>
+   #RewriteRule ^/debian-security/(pool/updates/main/l/linux/.*) http://security-cdn.debian.org/$1 [L,R=302]
 
    CustomLog /var/log/apache2/security.debian.org-access.log privacy
    ServerSignature On
