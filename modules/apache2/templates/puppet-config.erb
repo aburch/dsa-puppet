@@ -7,7 +7,7 @@
   # 2017-07-02
   #  https://mozilla.github.io/server-side-tls/ssl-config-generator/?server=apache-2.4.18&openssl=1.0.1p&hsts=no&profile=intermediate
   #  https://mozilla.github.io/server-side-tls/ssl-config-generator/?server=apache-2.4.25&openssl=1.0.1p&hsts=no&profile=intermediate
-  #  https://mozilla.github.io/server-side-tls/ssl-config-generator/?server=apache-2.4.25&openssl=1.1.0f&hsts=no&profile=intermediate
+  #  https://mozilla.github.io/server-side-tls/ssl-config-generator/?server=apache-2.4.25&openssl=1.1.0&hsts=no&profile=intermediate
   SSLCipherSuite          ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA256:ECDHE-ECDSA-AES128-SHA:ECDHE-RSA-AES256-SHA384:ECDHE-RSA-AES128-SHA:ECDHE-ECDSA-AES256-SHA384:ECDHE-ECDSA-AES256-SHA:ECDHE-RSA-AES256-SHA:DHE-RSA-AES128-SHA256:DHE-RSA-AES128-SHA:DHE-RSA-AES256-SHA256:DHE-RSA-AES256-SHA:ECDHE-ECDSA-DES-CBC3-SHA:ECDHE-RSA-DES-CBC3-SHA:EDH-RSA-DES-CBC3-SHA:AES128-GCM-SHA256:AES256-GCM-SHA384:AES128-SHA256:AES256-SHA256:AES128-SHA:AES256-SHA:DES-CBC3-SHA:!DSS
 
   <%- if has_variable?("apache2deb9") && @apache2deb9 -%>
