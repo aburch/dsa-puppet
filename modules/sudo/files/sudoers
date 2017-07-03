@@ -269,3 +269,6 @@ nagiosadm	tchaikovsky=(root)		NOPASSWD: /usr/sbin/service icinga reload
 # ports stuff
 mini-dak	porta=(archvsync)	NOPASSWD: /home/archvsync/signal_ports
 mini-dak	porta=(archvsync)	NOPASSWD: /home/archvsync/signal_ports-cd
+
+# temporary, for debugging
+thijs		klecker=(root)		/usr/sbin/tcpdump
