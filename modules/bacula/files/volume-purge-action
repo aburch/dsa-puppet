@@ -1,9 +1,9 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 # sends purge volume action=all to bacula using bconsole.
 # list of storages is read from stdin
 
-# Copyright 2013 Peter Palfrader
+# Copyright 2013,2017 Peter Palfrader
 #
 # Permission is hereby granted, free of charge, to any person obtaining
 # a copy of this software and associated documentation files (the
@@ -24,39 +24,59 @@
 # OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import optparse
+import argparse
 import subprocess
 import sys
+import psycopg2
+import psycopg2.extras
 
-
-parser = optparse.OptionParser()
-parser.set_usage("%prog [options]")
-parser.add_option("-v", "--verbose", dest="verbose",
+parser = argparse.ArgumentParser()
+parser.add_argument('-d', '--db-connect-string', metavar='connect-string', dest='db',
+  help='Database connect string')
+parser.add_argument('-D', '--db-connect-string-file', metavar='FILE', dest='dbfile',
+  default='/etc/dsa/bacula-reader-database',
+  help='File to read database connect string from (/etc/dsa/bacula-reader-database)')
+parser.add_argument("-v", "--verbose", dest="verbose",
   default=False, action="store_true",
   help="Be more verbose.")
-(options, args) = parser.parse_args()
+parser.add_argument("-n", "--nodo", dest="nodo",
+  default=False, action="store_true",
+  help="Print to cat rather than bconsole.")
+args = parser.parse_args()
 
-if len(args) >= 1:
-    parser.print_help()
-    sys.exit(1)
+if args.db is not None:
+  pass
+elif args.dbfile is not None:
+  args.db = open(args.dbfile).read().rstrip()
+else:
+  print >>sys.stderr, 'Need one of -d or -D.'
+  sys.exit(1)
+
+
+conn = psycopg2.connect(args.db)
+cursor = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+cursor.execute("""SELECT DISTINCT mediatype FROM media""", {})
+storages = set(r['mediatype'] for r in cursor.fetchall())
 
 cmd = []
-for storage in sys.stdin:
-    s = storage.rstrip()
-    c = 'purge volume action=all allpools storage=%s'%(s,)
+for s in storages:
+    c = 'truncate allpools storage=%s'%(s,)
     cmd.append(c)
-if options.verbose:
+if args.nodo:
+  print("\n".join(cmd))
+  sys.exit(0)
+if args.verbose:
     for c in cmd:
-      print "Will run: %s"%(c,)
+      print("Will run: %s"%(c,))
 
 p = subprocess.Popen(['bconsole'], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-(out, err) = p.communicate("\n".join(cmd))
+(out, err) = p.communicate("\n".join(cmd).encode())
 if p.returncode != 0:
     raise Exception("bconsole failed.  stdout:\n%s\nstderr:%s\n"%(out, err))
 
-if options.verbose:
-    print "stdout:\n%s"%(out,)
+if args.verbose:
+    print("stdout:\n%s"%(out,))
 
 if err != "":
-  print >> sys.stderr, "bconsole said on stderr:\n%s\n"%(err,)
+  print("bconsole said on stderr:\n%s\n"%(err,), file=sys.stderr)
   sys.exit(1)

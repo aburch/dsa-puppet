@@ -63,6 +63,7 @@ class bacula::director inherits bacula {
 		require => Package['bacula-console']
 	}
 
+	package { 'python3-psycopg2': ensure => installed }
 	file { '/etc/bacula/scripts/volume-purge-action':
 		mode    => '0555',
 		source  => 'puppet:///modules/bacula/volume-purge-action',
@@ -78,6 +79,6 @@ class bacula::director inherits bacula {
 		source  => 'puppet:///files/empty/',
 	}
 	file { "/etc/cron.d/puppet-bacula-stuff":
-		content => "@daily root (cat /etc/bacula/storages-list.d/*.storage; echo '$bacula::bacula_filestor_name-catalog') | /etc/bacula/scripts/volume-purge-action\n";
+		content => "@daily root chronic /etc/bacula/scripts/volume-purge-action -v\n";
 	}
 }
