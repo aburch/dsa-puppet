@@ -60,27 +60,28 @@ storages = set(r['mediatype'] for r in cursor.fetchall())
 
 cmd = []
 for s in storages:
-    c = 'truncate allpools storage=%s'%(s,)
-    cmd.append(c)
+  c = 'truncate allpools storage=%s'%(s,)
+  cmd.append(c)
 if args.nodo:
   print("\n".join(cmd))
   sys.exit(0)
-if args.verbose:
-    for c in cmd:
-      print("Will run: %s"%(c,))
 
-p = subprocess.Popen(['bconsole'], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-(out, err) = p.communicate("\n".join(cmd).encode())
-if p.returncode != 0:
+for c in cmd:
+  if args.verbose:
+    print("Will run: %s"%(c,))
+
+  p = subprocess.Popen(['bconsole'], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+  (out, err) = p.communicate(c.encode())
+  if p.returncode != 0:
     raise Exception("bconsole failed.  stdout:\n%s\nstderr:%s\n"%(out, err))
 
-if args.verbose:
+  if args.verbose:
     print("stdout:\n")
     sys.stdout.buffer.write(out)
     print("\n")
 
-if err != b"":
-  print("bconsole said on stderr:\n", file=sys.stderr)
-  sys.stderr.buffer.write(out)
-  print("", file=sys.stderr)
-  sys.exit(1)
+  if err != b"":
+    print("bconsole said on stderr:\n", file=sys.stderr)
+    sys.stderr.buffer.write(out)
+    print("", file=sys.stderr)
+    sys.exit(1)
