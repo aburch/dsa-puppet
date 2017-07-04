@@ -56,6 +56,7 @@ else:
 conn = psycopg2.connect(args.db)
 cursor = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
+cmd = []
 # Error volumes
 cursor.execute("""
   SELECT volumename
@@ -67,7 +68,8 @@ cursor.execute("""
     (lastwritten IS NULL OR lastwritten < current_date - interval '6 weeks')
 """, {})
 for r in cursor.fetchall():
-  print("delete volume=%s yes"%(r['volumename'],))
+  c = "delete volume=%s yes"%(r['volumename'],)
+  cmd.append(c)
 
 # Append volumes - we should not have any of these
 cursor.execute("""
@@ -85,7 +87,8 @@ cursor.execute("""
     volwrites = 0
 """, {})
 for r in cursor.fetchall():
-  print("delete volume=%s yes"%(r['volumename'],))
+  c = "delete volume=%s yes"%(r['volumename'],)
+  cmd.append(c)
 
 cursor.execute("""
   SELECT volumename
@@ -100,7 +103,6 @@ cursor.execute("""
     recycle=1
 """, {})
 
-cmd = []
 for r in cursor.fetchall():
   c = "delete volume=%s yes"%(r['volumename'],)
   cmd.append(c)
@@ -119,8 +121,12 @@ if p.returncode != 0:
     raise Exception("bconsole failed.  stdout:\n%s\nstderr:%s\n"%(out, err))
 
 if args.verbose:
-    print("stdout:\n%s"%(out,))
+    print("stdout:\n")
+    sys.stdout.buffer.write(out)
+    print("\n")
 
-if err != "":
-  print("bconsole said on stderr:\n%s\n"%(err,), file=sys.stderr)
+if err != b"":
+  print("bconsole said on stderr:\n", file=sys.stderr)
+  sys.stderr.buffer.write(out)
+  print("", file=sys.stderr)
   sys.exit(1)
