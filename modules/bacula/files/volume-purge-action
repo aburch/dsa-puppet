@@ -75,8 +75,12 @@ if p.returncode != 0:
     raise Exception("bconsole failed.  stdout:\n%s\nstderr:%s\n"%(out, err))
 
 if args.verbose:
-    print("stdout:\n%s"%(out,))
+    print("stdout:\n")
+    sys.stdout.buffer.write(out)
+    print("\n")
 
-if err != "":
-  print("bconsole said on stderr:\n%s\n"%(err,), file=sys.stderr)
+if err != b"":
+  print("bconsole said on stderr:\n", file=sys.stderr)
+  sys.stderr.buffer.write(out)
+  print("", file=sys.stderr)
   sys.exit(1)
