@@ -69,9 +69,9 @@ class bacula::director inherits bacula {
 		source  => 'puppet:///modules/bacula/volume-purge-action',
 		;
 	}
-	file { '/etc/bacula/scripts/get-deleteable-volumes':
+	file { '/etc/bacula/scripts/volumes-delete-old':
 		mode    => '0555',
-		source  => 'puppet:///modules/bacula/get-deleteable-volumes',
+		source  => 'puppet:///modules/bacula/volumes-delete-old',
 		;
 	}
 	file { '/etc/bacula/storages-list.d':

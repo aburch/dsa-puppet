@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-# queries a bacula database for volumes to delete
+# queries a bacula database for volumes to delete and deletes them using bconsole
 
 # Copyright 2010, 2011, 2013, 2017 Peter Palfrader
 #
@@ -28,6 +28,7 @@ import psycopg2
 import psycopg2.extras
 import re
 import sys
+import subprocess
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-d", "--db-connect-string", metavar="connect-string", dest="db",
@@ -35,6 +36,12 @@ parser.add_argument("-d", "--db-connect-string", metavar="connect-string", dest=
 parser.add_argument("-D", "--db-connect-string-file", metavar="FILE", dest="dbfile",
   default='/etc/dsa/bacula-reader-database',
   help="File to read database connect string from (/etc/dsa/bacula-reader-database)")
+parser.add_argument("-v", "--verbose", dest="verbose",
+  default=False, action="store_true",
+  help="Be more verbose.")
+parser.add_argument("-n", "--nodo", dest="nodo",
+  default=False, action="store_true",
+  help="Print to cat rather than bconsole.")
 args = parser.parse_args()
 
 if args.db is not None:
@@ -92,5 +99,28 @@ cursor.execute("""
     volbytes < 1000 AND
     recycle=1
 """, {})
+
+cmd = []
 for r in cursor.fetchall():
-  print("delete volume=%s yes"%(r['volumename'],))
+  c = "delete volume=%s yes"%(r['volumename'],)
+  cmd.append(c)
+
+if args.nodo:
+  print("\n".join(cmd))
+  sys.exit(0)
+
+if args.verbose:
+    for c in cmd:
+      print("Will run: %s"%(c,))
+
+p = subprocess.Popen(['bconsole'], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+(out, err) = p.communicate("\n".join(cmd).encode())
+if p.returncode != 0:
+    raise Exception("bconsole failed.  stdout:\n%s\nstderr:%s\n"%(out, err))
+
+if args.verbose:
+    print("stdout:\n%s"%(out,))
+
+if err != "":
+  print("bconsole said on stderr:\n%s\n"%(err,), file=sys.stderr)
+  sys.exit(1)
