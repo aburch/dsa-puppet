@@ -782,7 +782,11 @@ check_recipient:
                      protocol_name=${uc:$received_protocol}\n\
                      instance=${acl_m_grey}\n\
                      helo_name=${sender_helo_name}\n\
+<%- if scope.call_function('versioncmp', [@lsbmajdistrelease, '8']) <= 0 -%>
                      client_address=${substr_-3:${mask:$sender_host_address/24}}\n\
+<%- else -%>
+                     client_address=${sender_host_address}\n\
+<%- end -%>
                      client_name=${sender_host_name}\n\
                      sender=${sender_address}\n\
                      recipient=$local_part@$domain\n\n
