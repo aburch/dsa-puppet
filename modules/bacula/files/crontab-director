@@ -1,1 +1,2 @@
 @daily root chronic /etc/bacula/scripts/volume-purge-action -v
+@daily root chronic /etc/bacula/scripts/volumes-delete-old -v
