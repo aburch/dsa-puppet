@@ -1,0 +1,96 @@
+#!/usr/bin/python3
+
+# queries a bacula database for volumes to delete
+
+# Copyright 2010, 2011, 2013, 2017 Peter Palfrader
+#
+# Permission is hereby granted, free of charge, to any person obtaining
+# a copy of this software and associated documentation files (the
+# "Software"), to deal in the Software without restriction, including
+# without limitation the rights to use, copy, modify, merge, publish,
+# distribute, sublicense, and/or sell copies of the Software, and to
+# permit persons to whom the Software is furnished to do so, subject to
+# the following conditions:
+#
+# The above copyright notice and this permission notice shall be
+# included in all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+# EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+# MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+# NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+# LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+# OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+# WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+import argparse
+import psycopg2
+import psycopg2.extras
+import re
+import sys
+
+parser = argparse.ArgumentParser()
+parser.add_argument("-d", "--db-connect-string", metavar="connect-string", dest="db",
+  help="Database connect string")
+parser.add_argument("-D", "--db-connect-string-file", metavar="FILE", dest="dbfile",
+  default='/etc/dsa/bacula-reader-database',
+  help="File to read database connect string from (/etc/dsa/bacula-reader-database)")
+args = parser.parse_args()
+
+if args.db is not None:
+    pass
+elif args.dbfile is not None:
+    args.db = open(args.dbfile).read().rstrip()
+else:
+    print >>sys.stderr, "Need one of -d or -D."
+    sys.exit(1)
+
+
+conn = psycopg2.connect(args.db)
+cursor = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+
+# Error volumes
+cursor.execute("""
+  SELECT volumename
+  FROM media
+  WHERE
+    volstatus='Error' AND
+    firstwritten < current_date - interval '2 weeks' AND
+    labeldate < current_date - interval '2 weeks' AND
+    (lastwritten IS NULL OR lastwritten < current_date - interval '6 weeks')
+""", {})
+for r in cursor.fetchall():
+  print("delete volume=%s yes"%(r['volumename'],))
+
+# Append volumes - we should not have any of these
+cursor.execute("""
+  SELECT volumename
+  FROM media
+  WHERE
+    volstatus='Append' AND
+    firstwritten IS NULL AND
+    labeldate IS NULL AND
+    lastwritten IS NULL AND
+    voljobs = 0 AND
+    volfiles = 0 AND
+    volblocks = 0 AND
+    volbytes = 0 AND
+    volwrites = 0
+""", {})
+for r in cursor.fetchall():
+  print("delete volume=%s yes"%(r['volumename'],))
+
+cursor.execute("""
+  SELECT volumename
+  FROM media
+  WHERE
+    volstatus='Purged' AND
+    firstwritten < current_date - interval '18 weeks' AND
+    labeldate < current_date - interval '18 weeks' AND
+    lastwritten < current_date - interval '16 weeks' AND
+    volfiles = 0 AND
+    volbytes < 1000 AND
+    recycle=1
+""", {})
+for r in cursor.fetchall():
+  print("delete volume=%s yes"%(r['volumename'],))
