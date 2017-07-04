@@ -84,6 +84,6 @@ class bacula::director inherits bacula {
 		source  => 'puppet:///files/empty/',
 	}
 	file { "/etc/cron.d/puppet-bacula-stuff":
-		content => "@daily root chronic /etc/bacula/scripts/volume-purge-action -v\n";
+		source  => 'puppet:///modules/bacula/crontab-director',
 	}
 }
