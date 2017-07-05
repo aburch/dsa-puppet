@@ -36,6 +36,7 @@ roles:
     - fasolo.debian.org
   ftp.upload.d.o:
     - coccia.debian.org
+    - suchon.debian.org
     - usper.debian.org
   api.ftp-master:
     - coccia.debian.org
@@ -136,6 +137,7 @@ roles:
     - soriano.debian.org
   ssh.upload.d.o:
     - coccia.debian.org
+    - suchon.debian.org
     - usper.debian.org
   sso:
     - diabelli.debian.org
