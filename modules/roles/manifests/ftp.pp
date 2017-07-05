@@ -2,7 +2,7 @@ class roles::ftp {
 	# this is the FTP part of the roles::debian_mirror class
 
 	$binds = $::hostname ? {
-		klecker => [ '130.89.148.12', '[2001:610:1908:b000::148:12]' ],
+		klecker => [ '130.89.148.12', '[2001:610:1908:b000::148:12]', '[2001:67c:2564:a119::148:12]' ],
 		default => [ '[::]' ],
 	}
 
