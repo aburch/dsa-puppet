@@ -87,8 +87,6 @@ components:
   incoming.debian.org:
     master: fasolo.debian.org
     source: fasolo.debian.org:/srv/ftp-master.debian.org/public/incoming.debian.org/web
-    exclude-mirrors:
-      - klecker.debian.org
   metadata.ftp-master.debian.org:
     master: fasolo.debian.org
     source: fasolo.debian.org:/srv/ftp-master.debian.org/export
