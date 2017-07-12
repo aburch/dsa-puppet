@@ -78,6 +78,7 @@ do_rsync_on_master() {
 	allowed_rsyncs=()
 	allowed_rsyncs+=("--server --sender -vlHtrze.iLsf --safe-links .") # wheezy
 	allowed_rsyncs+=("--server --sender -vlHtrze.iLsfx --safe-links .") # jessie
+	allowed_rsyncs+=("--server --sender -vlHtrze.iLsfxC --safe-links .") # stretch
 
 	for cmd_idx in ${!allowed_rsyncs[*]}; do
 		args="${allowed_rsyncs[$cmd_idx]}"
@@ -113,6 +114,7 @@ do_rsync_on_source() {
 		for path in $(awk -v host="$(hostname -f)" '!/^ *(#|$)/ && $3 == host {print $4}' $COMPONENTLIST); do
 			allowed_rsyncs+=("--server --sender -lHtrze.iLsf --safe-links . $path/.") # wheezy
 			allowed_rsyncs+=("--server --sender -lHtrze.iLsfx --safe-links . $path/.") # jessie
+			allowed_rsyncs+=("--server --sender -lHtrze.iLsfxC --safe-links . $path/.") # stretch
 		done
 	fi
 	for cmd_idx in ${!allowed_rsyncs[*]}; do
