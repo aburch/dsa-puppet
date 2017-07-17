@@ -10,6 +10,12 @@ class bacula::director inherits bacula {
 		hasstatus => true,
 		require   => Package['bacula-director-pgsql']
 	}
+	systemd::override { 'bacula-director':
+		content => @(EOT)
+			[Unit]
+			After=unbound.service
+			| EOT
+	}
 
 	exec { 'bacula-director reload':
 		path        => '/usr/bin:/usr/sbin:/bin:/sbin',
