@@ -51,21 +51,22 @@ class bacula::client inherits bacula {
 		notify  => Service['bacula-fd'],
 	}
 	if (versioncmp($::lsbmajdistrelease, '9') >= 0 and $systemd) {
-		file { '/etc/systemd/system/bacula-fd.service.d':
-			ensure	=> directory,
-			mode	=> '0755',
-			owner	=> root,
-			group	=> root,
-		}
+		# old name for the override content
 		file { '/etc/systemd/system/bacula-fd.service.d/user.conf':
-			source	=> 'puppet:///modules/bacula/bacula-fd-systemd',
-			mode	=> '0400',
-			owner	=> root,
-			group	=> root,
-			notify	=> Exec['systemctl daemon-reload'],
+			ensure	=> absent,
+		}
+		systemd::override { 'bacula-fd':
+			content => @(EOT)
+				[Service]
+				ExecStart=
+				ExecStart=/usr/sbin/bacula-fd -c $CONFIG -f -u bacula -k
+				| EOT
 		}
 	} else {
 		file { '/etc/systemd/system/bacula-fd.service.d/user.conf':
+			ensure	=> absent,
+		}
+		systemd::override { 'bacula-fd':
 			ensure	=> absent,
 		}
 	}
