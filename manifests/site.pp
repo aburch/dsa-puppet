@@ -42,6 +42,7 @@ node default {
 	include popcon
 	include portforwarder
 	include postgres
+	include haveged
 
 	if $::lsbdistcodename == squeeze {
 		include roles::udldap::client
