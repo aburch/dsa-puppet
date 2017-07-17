@@ -9,6 +9,13 @@ class bacula::storage inherits bacula {
 		enable    => true,
 		hasstatus => true,
 	}
+	systemd::override { 'bacula-sd':
+		content => @(EOT)
+			[Service]
+			Group=bacula
+			SupplementaryGroups=ssl-cert
+			| EOT
+	}
 
 	exec { 'bacula-sd restart-when-idle':
 		path        => '/usr/bin:/usr/sbin:/bin:/sbin',
