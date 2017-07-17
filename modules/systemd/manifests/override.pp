@@ -21,25 +21,24 @@ define systemd::override (
 					ensure  => $ensure,
 					content => $content,
 					notify  => [ Exec['systemctl daemon-reload'],
-					             Service["{$name}"],
+					             Service["${name}"],
 					            ]
-					}
 				}
 			} elsif $source {
 				file { "${dest}":
 					ensure  => $ensure,
 					source  => $source,
 					notify  => [ Exec['systemctl daemon-reload'],
-					             Service["{$name}"],
+					             Service["${name}"],
 					            ]
-					}
+				}
 			}
 		}
 		absent:  {
 			file { "${dest}":
 				ensure  => $ensure,
 				notify  => [ Exec['systemctl daemon-reload'],
-				             Service["{$name}"],
+				             Service["${name}"],
 				           ]
 			}
 			file { "${dir}":
