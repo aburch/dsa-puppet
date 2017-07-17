@@ -33,7 +33,7 @@ define systemd::override (
 		absent:  {
 			file { "${dest}":
 				ensure  => $ensure,
-				notify  => Exec['service apache2 reload'],
+				notify  => Exec['systemctl daemon-reload'],
 			}
 			file { "${dir}":
 				ensure => $ensure
