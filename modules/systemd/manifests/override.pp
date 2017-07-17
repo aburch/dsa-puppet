@@ -20,20 +20,27 @@ define systemd::override (
 				file { "${dest}":
 					ensure  => $ensure,
 					content => $content,
-					notify  => Exec['systemctl daemon-reload'],
+					notify  => [ Exec['systemctl daemon-reload'],
+					             Service["{$name}"],
+					            ]
+					}
 				}
 			} elsif $source {
 				file { "${dest}":
 					ensure  => $ensure,
 					source  => $source,
-					notify  => Exec['systemctl daemon-reload'],
-				}
+					notify  => [ Exec['systemctl daemon-reload'],
+					             Service["{$name}"],
+					            ]
+					}
 			}
 		}
 		absent:  {
 			file { "${dest}":
 				ensure  => $ensure,
-				notify  => Exec['systemctl daemon-reload'],
+				notify  => [ Exec['systemctl daemon-reload'],
+				             Service["{$name}"],
+				           ]
 			}
 			file { "${dir}":
 				ensure => $ensure
