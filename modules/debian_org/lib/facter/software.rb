@@ -157,3 +157,8 @@ Facter.add("tor_ge_0_2_9") do
 		system(%{test -n "$(dpkg-query -W -f='${Version}' tor 2>/dev/null)" && dpkg --compare-versions "$(dpkg-query -W -f='${Version}' tor)" ge 0.2.9})
 	end
 end
+Facter.add("haveged") do
+	setcode do
+		FileTest.exist?("/usr/sbin/haveged")
+	end
+end
