@@ -11,7 +11,7 @@ when "handel.debian.org" then                                  ignore << %w{pupp
 when "reger.debian.org" then                                   ignore << %w{librt-extension-commandbymail-perl}
 when /(rainier|rapoport).debian.org/ then                      ignore << %w{rabbitmq-server}
 when "sibelius.debian.org" then                                ignore << %w{tivsm-ba tivsm-bacit tivsm-api64 gskssl64 gskcrypt64 tivsm-api tivsm-apicit gskssl gskcrypt}
-when /(storace|backuphost).debian.org/ then                    ignore << %w{postgresql-client-9.1}
+when /(storace|backuphost).debian.org/ then                    ignore << %w{postgresql-client-9.1 libssl1.0.0 postgresql-client-9.4}
 end
 
 if scope.call_function('versioncmp', [@lsbmajdistrelease, '8']) <= 0
