@@ -25,25 +25,25 @@ define systemd::override (
 					            ]
 				}
 			} elsif $source {
-				if defined(Service["${name}"]) {
-					$notify = [ Exec['systemctl daemon-reload'], Service["${name}"] ]
-				} else {
-					$notify = [ Exec['systemctl daemon-reload'] ]
-				}
-
 				file { "${dest}":
 					ensure  => $ensure,
 					source  => $source,
-					notify  => $notify,
-				}
+					notify  => [ Exec['systemctl daemon-reload'],
+					             Service["${name}"],
+					           ]
+					}
 			}
 		}
 		absent:  {
+			if defined(Service["${name}"]) {
+				$notify = [ Exec['systemctl daemon-reload'], Service["${name}"] ]
+			} else {
+				$notify = [ Exec['systemctl daemon-reload'] ]
+			}
+
 			file { "${dest}":
 				ensure  => $ensure,
-				notify  => [ Exec['systemctl daemon-reload'],
-				             Service["${name}"],
-				           ]
+				notify  => $notify,
 			}
 			file { "${dir}":
 				ensure => $ensure
