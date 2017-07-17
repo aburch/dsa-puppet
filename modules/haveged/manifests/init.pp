@@ -13,6 +13,7 @@ class haveged {
 
 	# work around #858134
 	systemd::override { 'haveged':
+		ensure => $ensure,
 		content => @(EOT)
 			[Unit]
 			After=systemd-tmpfiles-setup.service
