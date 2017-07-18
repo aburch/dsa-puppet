@@ -142,7 +142,6 @@ EOF
                 genschrootconf "$suite" "$arch" "$target" "backports"
                 if [ -n "$buildd" ] ; then
                     genschrootconf "$suite" "$arch" "$target" "backports-sloppy"
-                    genschrootconf "$suite" "$arch" "$target" "lts"
                     genschrootconf "$suite" "$arch" "$target" "proposed-updates"
                     genschrootconf "$suite" "$arch" "$target" "security"
                     case "$arch" in
