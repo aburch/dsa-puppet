@@ -49,6 +49,9 @@
 
 <Macro vstatic-vhost-extra-network-test.debian.org>
 	ServerAlias network-test-backend.debian.org
+	<Location /nm>
+		Header set Cache-Control "must-revalidate, max-age=0"
+	</Location>
 </Macro>
 
 <Macro vstatic-vhost-extra-bits.debian.org>
