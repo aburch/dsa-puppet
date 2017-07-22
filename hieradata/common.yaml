@@ -299,7 +299,6 @@ roles:
     - pkgmirror-csail.debian.org
     - santoro.debian.org
     - sechter.debian.org
-    - senfter.debian.org
     - setoguchi.debian.org
     - ticharich.debian.org
     - villa.debian.org
