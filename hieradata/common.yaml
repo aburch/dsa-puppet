@@ -303,7 +303,6 @@ roles:
     - setoguchi.debian.org
     - ticharich.debian.org
     - villa.debian.org
-    - wieck.debian.org
   bgp:
     - mirror-bytemark.debian.org
     - mirror-conova.debian.org
