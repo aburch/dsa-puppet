@@ -81,6 +81,7 @@
 	RewriteRule		^/migration/testing.pl		/migration/cache/%2/%1.html [PT,L]
 	RewriteRule		^/migration/testing.pl		/migration/cache/_index.html
 
+	Alias /oldstable-proposed-updates/ /srv/static.debian.org/mirrors/release.debian.org-pu/cur/
 	Alias /proposed-updates/ /srv/static.debian.org/mirrors/release.debian.org-pu/cur/
 	<Directory /srv/static.debian.org/mirrors/release.debian.org-pu/cur>
 		Require all granted
