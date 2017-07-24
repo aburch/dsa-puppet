@@ -17,3 +17,4 @@
 
 # backscatter to postmaster@debian.org, 20170723
 155.133.38.0/24
+*.healthtorpedo.com
