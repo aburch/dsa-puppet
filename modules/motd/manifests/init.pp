@@ -15,9 +15,16 @@ class motd {
 		ensure => absent,
 	}
 
-	file { '/etc/motd':
-		ensure => link,
-		target => '/var/run/motd'
+	if versioncmp($::lsbmajdistrelease, '9') < 0 {
+		file { '/etc/motd':
+			ensure => link,
+			target => '/var/run/motd'
+		}
+	} else {
+		file { '/etc/motd':
+			ensure => link,
+			target => '/run/motd.dynamic'
+		}
 	}
 
 	file { '/etc/update-motd.d/puppet-motd':
