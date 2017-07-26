@@ -32,9 +32,4 @@ class motd {
 		mode    => '0555',
 		content => template('motd/motd.erb')
 	}
-
-	exec { 'updatemotd':
-		command     => 'uname -snrvm > /var/run/motd && cat /etc/motd.tail >> /var/run/motd',
-		refreshonly => true,
-	}
 }
