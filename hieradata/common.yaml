@@ -283,7 +283,6 @@ roles:
     - coccia.debian.org
     - draghi.debian.org
     - klecker.debian.org
-    - lobos.debian.org
     - manziarly.debian.org
     - milanollo.debian.org
     - mirror-bytemark.debian.org
