@@ -286,7 +286,6 @@ roles:
     - lobos.debian.org
     - manziarly.debian.org
     - milanollo.debian.org
-    - mirror-anu.debian.org
     - mirror-bytemark.debian.org
     - mirror-conova.debian.org
     - mirror-csail.debian.org
