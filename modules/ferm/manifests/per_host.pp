@@ -11,7 +11,7 @@ class ferm::per_host {
 		vittoria: {
 			@ferm::rule { 'debconf17':
 				description     => 'temporarily allow DC17 access',
-				rule            => '&SERVICE_RANGE(tcp, 5432, (206.167.36.195/32))'
+				rule            => '&SERVICE_RANGE(tcp, 5432, ( 206.167.44.99/32 206.167.36.195/32 ))'
 			}
 		}
 		czerny,clementi: {
