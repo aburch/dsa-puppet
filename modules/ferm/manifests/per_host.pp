@@ -8,6 +8,12 @@ class ferm::per_host {
 	}
 
 	case $::hostname {
+		vittoria: {
+			@ferm::rule { 'debconf17':
+				description     => 'temporarily allow DC17 access',
+				rule            => '&SERVICE_RANTE(tcp, 5432, (206.167.36.195/32))'
+			}
+		}
 		czerny,clementi: {
 			@ferm::rule { 'dsa-upsmon':
 				description     => 'Allow upsmon access',
