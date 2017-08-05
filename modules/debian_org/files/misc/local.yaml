@@ -75,7 +75,6 @@ nameinfo:
   pinel.debian.org: Julie Pinel (fl. 1710 - 1737)
   pizzetti.debian.org: Ildebrando Pizzetti (20 September 1880 - 13 February 1968)
   plummer.debian.org: John Plummer (c. 1410 - c. 1483)
-  porpora.debian.org: Niccolò (Antonio) Porpora (17 August 1686 - 3 March 1768)
   porta.debian.org: Giovanni Porta (c. 1675 - 21 June 1755)
   praetorius.debian.org: Hieronymus Praetorius (August 10th, 1560 - January 27th, 1629)
   prokofiev.debian.org: Sergei Sergeyevich Prokofiev (April 27th, 1891 - March 5th, 1953)
@@ -191,7 +190,6 @@ host_settings:
     - mipsel-manda-02.debian.org
     - mipsel-manda-03.debian.org
     - mipsel-sil-01.debian.org
-    - porpora.debian.org
     - powerpc-osuosl-01.debian.org
     - powerpc-unicamp-01.debian.org
     - ppc64el-osuosl-01.debian.org
