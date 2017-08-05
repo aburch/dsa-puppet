@@ -76,7 +76,6 @@ nameinfo:
   pizzetti.debian.org: Ildebrando Pizzetti (20 September 1880 - 13 February 1968)
   plummer.debian.org: John Plummer (c. 1410 - c. 1483)
   porta.debian.org: Giovanni Porta (c. 1675 - 21 June 1755)
-  praetorius.debian.org: Hieronymus Praetorius (August 10th, 1560 - January 27th, 1629)
   prokofiev.debian.org: Sergei Sergeyevich Prokofiev (April 27th, 1891 - March 5th, 1953)
   quantz.debian.org: Johann Joachim Quantz (January 30th, 1697 - July 12th, 1773)
   rachmaninoff: Sergei Vasilievich Rachmaninoff (1 April 1873 - 28 March 1943)
@@ -194,7 +193,6 @@ host_settings:
     - powerpc-unicamp-01.debian.org
     - ppc64el-osuosl-01.debian.org
     - ppc64el-unicamp-01.debian.org
-    - praetorius.debian.org
     - spontini.debian.org
     - x86-grnet-01.debian.org
     - zandonai.debian.org
