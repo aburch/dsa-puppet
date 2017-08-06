@@ -73,6 +73,14 @@
 @def $HOST_RCODE0_V6 = (2A02:850:8::/47);
 @def $HOST_NETNOD_V4 = (192.71.80.0/24 192.36.144.222 192.36.144.218);
 
+<%=
+def getfastlyranges()
+	data = YAML.safe_load(File.open("/srv/puppet.debian.org/puppet-facts/fastly_ranges.yaml").read)
+	return data.addresses
+end
+%>
+@def $HOST_FASTLY = (<%= getfastlyranges().join(' ') %>);
+
 @def $HOST_DEBIAN_V4 = (<%= scope.function_filter_ipv4([dbs]).uniq.join(' ') %>);
 @def $HOST_DEBIAN_V6 = (<%= scope.function_filter_ipv6([dbs]).uniq.join(' ') %>);
 @def $HOST_DEBIAN = ($HOST_DEBIAN_V4 $HOST_DEBIAN_V6);
