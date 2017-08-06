@@ -105,7 +105,7 @@ class buildd ($ensure=present) {
 
 		if $has_srv_buildd {
 			file { '/etc/cron.d/puppet-update-buildd-schroots':
-				content  => "13 21 * * 0,3 root PATH=/sbin:/usr/sbin:/bin:/usr/bin:/usr/local/sbin:/usr/local/bin setup-all-dchroots buildd\n",
+				content  => "13 22 * * 0,3 root PATH=/sbin:/usr/sbin:/bin:/usr/bin:/usr/local/sbin:/usr/local/bin setup-all-dchroots buildd\n",
 			}
 		}
 
