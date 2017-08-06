@@ -286,7 +286,6 @@ roles:
     - manziarly.debian.org
     - milanollo.debian.org
     - mirror-bytemark.debian.org
-    - mirror-conova.debian.org
     - mirror-csail.debian.org
     - mirror-isc.debian.org
     - mirror-umn.debian.org
