@@ -77,7 +77,7 @@
 def getfastlyranges()
     begin
 	data = YAML.safe_load(File.open("/srv/puppet.debian.org/puppet-facts/fastly_ranges.yaml").read)
-        return data.addresses
+        return data['addresses']
     rescue
         return []
     end
