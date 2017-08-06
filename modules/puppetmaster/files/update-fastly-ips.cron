@@ -1,0 +1,2 @@
+MAILTO=root
+@daily	puppet update-fastly-ips /srv/puppet.debian.org/puppet-facts/fastly_ranges.yaml

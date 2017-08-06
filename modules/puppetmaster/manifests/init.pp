@@ -26,4 +26,12 @@ class puppetmaster {
 	concat { '/srv/puppet.debian.org/puppet-facts/onionbalance-services.yaml':
 	}
 	Concat::Fragment <<| tag == "onionbalance-services.yaml" |>>
+
+	file { '/etc/cron.d/update-fastly-ips':
+		source => 'puppet:///modules/puppetmaster/update-fastly-ips.cron'
+	}
+	file { '/usr/local/bin/update-fastly-ips':
+		source => 'puppet:///modules/puppetmaster/update-fastly-ips.sh',
+		mode   => '0555',
+	}
 }
