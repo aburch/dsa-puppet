@@ -73,7 +73,7 @@
 @def $HOST_RCODE0_V6 = (2A02:850:8::/47);
 @def $HOST_NETNOD_V4 = (192.71.80.0/24 192.36.144.222 192.36.144.218);
 
-<%=
+<%
 def getfastlyranges()
     begin
 	data = YAML.safe_load(File.open("/srv/puppet.debian.org/puppet-facts/fastly_ranges.yaml").read)
