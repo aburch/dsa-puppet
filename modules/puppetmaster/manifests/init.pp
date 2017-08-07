@@ -27,8 +27,11 @@ class puppetmaster {
 	}
 	Concat::Fragment <<| tag == "onionbalance-services.yaml" |>>
 
-	file { '/etc/cron.d/update-fastly-ips':
+	file { '/etc/cron.d/puppet-update-fastly-ips':
 		source => 'puppet:///modules/puppetmaster/update-fastly-ips.cron'
+	}
+	file { '/etc/cron.d/update-fastly-ips':
+		ensure => absent,
 	}
 	file { '/usr/local/bin/update-fastly-ips':
 		source => 'puppet:///modules/puppetmaster/update-fastly-ips.sh',
