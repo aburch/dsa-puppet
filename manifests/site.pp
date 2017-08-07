@@ -53,7 +53,7 @@ node default {
 		}
 	}
 
-	if $::hostname in [ubc-bl7,ubc-bl3,ubc-bl2,ubc-bl6,ubc-bl8,ubc-bl4,byrd,clementi,czerny,bm-bl1,bm-bl2,bm-bl3,bm-bl4,bm-bl5,bm-bl6,bm-bl7,bm-bl8,bm-bl9,bm-bl10,bm-bl11,bm-bl12,bm-bl13,bm-bl14,csail-node01,csail-node02,grnet-node01,grnet-node02,ubc-enc2bl01,ubc-enc2bl02,ubc-enc2bl09,ubc-enc2bl10] {
+	if $::hostname in [ubc-bl7,ubc-bl3,ubc-bl2,ubc-bl6,ubc-bl8,ubc-bl4,byrd,clementi,czerny,bm-bl1,bm-bl2,bm-bl3,bm-bl4,bm-bl5,bm-bl6,bm-bl7,bm-bl8,bm-bl9,bm-bl10,bm-bl11,bm-bl12,bm-bl13,bm-bl14,csail-node01,csail-node02,grnet-node01,grnet-node02,ubc-enc2bl01,ubc-enc2bl02,ubc-enc2bl09,ubc-enc2bl10,aagaard,acker] {
 		include ganeti2
 	}
 

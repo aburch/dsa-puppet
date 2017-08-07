@@ -24,6 +24,9 @@ class dsa_lvm {
 		'ubc-enc2bl01','ubc-enc2bl02','ubc-enc2bl09','ubc-enc2bl10': {
 			$conffile = 'lvm-ubc-ganeti2.conf'
 		}
+		'aagaard','acker': {
+			$conffile = 'lvm-conova-ganeti.conf'
+		}
 		default: {
 			$conffile = ''
 		}

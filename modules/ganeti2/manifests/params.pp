@@ -43,6 +43,11 @@ class ganeti2::params {
 			$ganeti_priv  = ['172.29.175.0/24']
 			$drbd         = true
 		}
+		'ganeti-conova.debian.org': {
+			$ganeti_hosts = ['217.196.149.227/32', '217.196.149.228/32']
+			$ganeti_priv  = ['172.29.184.11/32', '172.29.184.12/32']
+			$drbd         = true
+		}
 		default: {
 			$ganeti_hosts = []
 			$ganeti_priv  = []
