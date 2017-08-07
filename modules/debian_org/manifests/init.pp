@@ -251,8 +251,8 @@ class debian_org {
 		owner  => root,
 		group  => root,
 	}
-	file { '/usr/local/bin/dsa-is-shutdown-in-progress':
-		source	=> 'puppet:///modules/debian_org/dsa-is-shutdown-in-progress',
+	file { '/usr/local/bin/dsa-is-shutdown-scheduled':
+		source	=> 'puppet:///modules/debian_org/dsa-is-shutdown-scheduled',
 		mode	=> '0555',
 	}
 
