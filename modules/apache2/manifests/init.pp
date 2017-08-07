@@ -185,4 +185,11 @@ class apache2 {
 		content => template('apache2/ssl-key-pins.erb'),
 		notify  => Exec['service apache2 reload'],
 	}
+
+	file { '/etc/cron.d/puppet-export-scheduled-shutdown':
+		source	=> 'puppet:///modules/apache2/cron-export-scheduled-shutdown',
+	}
+	apache2::config { 'local-scheduled-shutdown':
+		source	=> 'puppet:///modules/apache2/local-scheduled-shutdown',
+	}
 }

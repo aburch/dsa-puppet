@@ -1,0 +1,15 @@
+#!/bin/sh
+
+# sysvinit
+if /usr/lib/nagios/plugins/check_procs -w 1: -u root -C shutdown > /dev/null; then
+	exit 0
+fi
+# jessie
+if /usr/lib/nagios/plugins/check_procs -w 1: -u root -a /lib/systemd/systemd-shutdownd > /dev/null; then
+	exit 0
+fi
+# stretch
+if busctl get-property org.freedesktop.login1 /org/freedesktop/login1 org.freedesktop.login1.Manager ScheduledShutdown 2> /dev/null | awk '$3 > 0 { t=$3 } END { exit (t == 0)}'; then
+	exit 0
+fi
+exit 1

@@ -251,6 +251,10 @@ class debian_org {
 		owner  => root,
 		group  => root,
 	}
+	file { '/usr/local/bin/dsa-is-shutdown-in-progress':
+		source	=> 'puppet:///modules/debian_org/dsa-is-shutdown-in-progress',
+		mode	=> '0555',
+	}
 
 	exec { 'dpkg-reconfigure tzdata -pcritical -fnoninteractive':
 		path        => '/usr/bin:/usr/sbin:/bin:/sbin',
