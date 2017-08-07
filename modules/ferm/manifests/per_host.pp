@@ -46,7 +46,7 @@ class ferm::per_host {
 			}
 			@ferm::rule { 'fastly-syslog':
 				description     => 'Allow syslog access',
-				rule            => '&SERVICE_RANGE(tcp, 5140, $HOST_FASTLY)'
+				rule            => '&SERVICE_RANGE(tcp, 5141, $HOST_FASTLY)'
 			}
 		}
 		kaufmann: {

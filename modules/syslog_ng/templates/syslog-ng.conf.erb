@@ -132,6 +132,16 @@ source s_network {
 };
 <%- end -%>
 
+<%- if (@hostname == "lully") -%>
+source s_network_fastly {
+	tcp6(port(5141) max-connections(100)
+		tls( key_file("/etc/exim4/ssl/thishost.key")
+		     cert_file("/etc/exim4/ssl/thishost.crt")
+		     peer-verify(optional-untrusted))
+	);
+};
+<%- end -%>
+
 
 ######
 # destinations
@@ -556,4 +566,12 @@ log { source(s_local);
 log { source(s_local);
       source(s_network);
       filter(f_syslog); destination(df_ALL_syslog); };
+<%- end -%>
+
+<%- if (@hostname == "lully") -%>
+destination fastly { file("/var/log/fastly.log" };
+
+log { source(s_network_fastly);
+      destination(fastly); };
+
 <%- end -%>
