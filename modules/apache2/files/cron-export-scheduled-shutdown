@@ -1,2 +1,2 @@
 PATH=/usr/local/bin:/usr/bin:/bin
-*/2	root	if dsa-is-shutdown-scheduled; then echo 'system-in-shutdown' > /srv/www/default.debian.org/htdocs/shutdown-in-progress ; else rm -f /srv/www/default.debian.org/htdocs/shutdown-in-progress; fi
+*/2	root	mkdir -p /run/dsa/shutdown-marker; if dsa-is-shutdown-scheduled; then echo 'system-in-shutdown' > /run/dsa/shutdown-marker/shutdown-in-progress; else rm -f /run/dsa/shutdown-marker/shutdown-in-progress; fi
