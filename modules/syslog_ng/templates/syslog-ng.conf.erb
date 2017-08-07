@@ -569,7 +569,7 @@ log { source(s_local);
 <%- end -%>
 
 <%- if (@hostname == "lully") -%>
-destination fastly { file("/var/log/fastly.log" };
+destination fastly { file("/var/log/fastly.log"); };
 
 log { source(s_network_fastly);
       destination(fastly); };
