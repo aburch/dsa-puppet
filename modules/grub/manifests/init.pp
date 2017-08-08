@@ -1,7 +1,7 @@
 class grub {
 	if ($::kernel == 'Linux' and $::is_virtual and $::virtual == 'kvm') {
 		file { '/etc/default/grub':
-			source  => 'puppet:///modules/grub/etc-default-grub',
+			content  => template('grub/etc-default-grub.erb'),
 			notify  => Exec['update-grub']
 		}
 
