@@ -1,8 +1,8 @@
 class hardware::raid {
 	include hardware::raid::proliant
 
-	if $::productname == 'PowerEdge 2850' {
-		include hardware::raid::megactl
+	if $::productname == 'PowerEdge 1950' {
+		include hardware::raid::dell
 	}
 
 	include hardware::raid::raidmpt
