@@ -155,7 +155,6 @@ roles:
     - fasolo.debian.org
     - porta.debian.org
   static_mirror:
-    - busoni.debian.org
     - klecker.debian.org
     - mirror-anu.debian.org
     - mirror-csail.debian.org
@@ -163,7 +162,6 @@ roles:
     - senfter.debian.org
     - santoro.debian.org
   static_mirror_onion:
-    - busoni.debian.org
     - klecker.debian.org
     - mirror-isc.debian.org
     - senfter.debian.org
@@ -201,7 +199,6 @@ roles:
   weblog_destination:
     - wolkenstein.debian.org
   weblog_provider:
-    - busoni.debian.org
     - klecker.debian.org
     - mirror-anu.debian.org
     - mirror-csail.debian.org
@@ -278,7 +275,6 @@ roles:
     - olin.debian.org
   experimental_apache:
     - beach.debian.org
-    - busoni.debian.org
     - cgi-grnet-01.debian.org
     - coccia.debian.org
     - draghi.debian.org
