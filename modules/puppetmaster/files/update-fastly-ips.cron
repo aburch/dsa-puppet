@@ -1,2 +1,2 @@
 MAILTO=root
-@daily	root	update-fastly-ips /srv/puppet.debian.org/puppet-facts/fastly_ranges.yaml
+@daily	root	/usr/local/bin/update-fastly-ips /srv/puppet.debian.org/puppet-facts/fastly_ranges.yaml
