@@ -1,5 +1,5 @@
 class hardware::raid::dell {
-	site::aptrepo { 'debian.restricted':
+	site::aptrepo { 'debian.restricted.dell':
 		url        => 'http://db.debian.org/debian-admin',
 		suite      => 'jessie-restricted',
 		components => 'non-free',
