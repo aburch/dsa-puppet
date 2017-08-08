@@ -1,0 +1,42 @@
+#!/bin/bash
+
+##
+## THIS FILE IS UNDER PUPPET CONTROL. DON'T EDIT IT HERE.
+## USE: git clone git+ssh://$USER@puppet.debian.org/srv/puppet.debian.org/git/dsa-puppet.git
+##
+
+##
+## Wrapper to call qemu-system-aarch64 from Ganeti, removing all x86/PCI
+## assumptions.
+##
+
+# With qemu-system-aarch64 the machine should be defined even for simple
+# commands like querying the list of devices.
+args=("-machine")
+args+=("virt")
+
+# We want to always enable KVM. Contrary to what the Ganeti's documentation
+# says, enabling kvm_flag is not enough.
+args+=("-enable-kvm")
+
+while [ "$1" ]; do
+    case "$1" in
+        -machine|-M)
+            # Ignore the machine argument (it is already defined above),
+            # except when querying the list of machines
+            if [ "$2" = "?" ] ; then
+                args+=("-M")
+                args+=("?")
+            fi
+            shift
+            ;;
+        *)
+            # Replace PCI devices by their bus agnostic variant, and drop
+            # all the PCI related options
+            args+=("$(echo $1 | sed -e 's/virtio-\(\w\+\)-pci/virtio-\1-device/' -e 's/,bus=[^,]\+,addr=[^,]\+//')")
+            ;;
+    esac
+    shift
+done
+
+exec /usr/bin/qemu-system-aarch64 "${args[@]}"

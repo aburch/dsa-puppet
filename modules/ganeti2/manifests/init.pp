@@ -23,4 +23,11 @@ class ganeti2 {
 		source => 'puppet:///modules/ganeti2/cleanup-watcher-pause-file',
 		mode    => '0555',
 	}
+
+	if $::debarchitecture == 'arm64' {
+		file { '/usr/local/bin/qemu-system-aarch64-wrapper':
+			source => 'puppet:///modules/ganeti2/qemu-system-aarch64-wrapper',
+			mode   => '0755',
+		}
+	}
 }
