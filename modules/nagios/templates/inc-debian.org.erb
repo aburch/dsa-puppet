@@ -22,7 +22,7 @@ out
 # if a system is running shutdown.  We do not use check_nrpe's
 # exit code as that does not reliably tell us if the check could
 # not connect to the nrpe server or if the remote check returned not-null.
-command[dsa2_shutdown]=if /usr/lib/nagios/plugins/check_procs -w 1: -u root -C shutdown > /dev/null || /usr/lib/nagios/plugins/check_procs -w 1: -u root -a /lib/systemd/systemd-shutdownd > /dev/null || ( busctl get-property org.freedesktop.login1 /org/freedesktop/login1 org.freedesktop.login1.Manager ScheduledShutdown 2> /dev/null | awk '$3 > 0 { t=$3; } END { exit (t == 0)}' ); then echo 'system-in-shutdown'; else echo 'no shutdown running' ; fi
+command[dsa2_shutdown]=if /usr/local/bin/dsa-is-shutdown-scheduled; then echo 'system-in-shutdown'; else echo 'no shutdown running' ; fi
 command[restart-ekey]=sudo /usr/sbin/service ekeyd-egd-linux restart
 command[restart-samhain]=sudo /usr/sbin/service samhain restart
 command[restart-ekey]=sudo /usr/sbin/service ekeyd-egd-linux restart
