@@ -3,9 +3,18 @@
 // USE: git clone git+ssh://$USER@puppet.debian.org/srv/puppet.debian.org/git/dsa-puppet.git
 //
 
+<%- def country
+def country(c)
+    if scope.call_function('versioncmp', [@lsbmajdistrelease, '9']) <= 0
+        "geoip country " + c
+    else
+	"country_" + c
+    end
+end %->
+
 // Africa
 acl AF {
-	country_AO;
+	<%= country "AO" %>;
 	country_BF;
 	country_BI;
 	country_BJ;
