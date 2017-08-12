@@ -33,9 +33,16 @@ class named::geodns inherits named {
 		source => 'puppet:///modules/named/common/named.conf.local',
 		notify  => Service['bind9'],
 	}
-	file { '/etc/bind/named.conf.acl':
-		source => 'puppet:///modules/named/common/named.conf.acl',
-		notify  => Service['bind9'],
+        if (versioncmp($::lsbmajdistrelease, '9') >= 0) {
+		file { '/etc/bind/named.conf.acl':
+			source => 'puppet:///modules/named/common/named.conf.acl',
+			notify  => Service['bind9'],
+		}
+	} else {
+		file { '/etc/bind/named.conf.acl':
+			source => 'puppet:///modules/named/common/named.conf.acl.bind99',
+			notify  => Service['bind9'],
+		}
 	}
 	file { '/etc/bind/geodns/zonefiles':
 		ensure => directory,
