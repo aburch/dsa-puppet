@@ -5,7 +5,7 @@ if /usr/lib/nagios/plugins/check_procs -w 1: -u root -C shutdown > /dev/null; th
 	exit 0
 fi
 # jessie
-if /usr/lib/nagios/plugins/check_procs -w 1: -u root -a /lib/systemd/systemd-shutdownd > /dev/null; then
+if pgrep -u root -fx /lib/systemd/systemd-shutdownd > /dev/null; then
 	exit 0
 fi
 # stretch
