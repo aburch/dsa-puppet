@@ -3,9 +3,8 @@ class time {
 	$localtimeservers = hiera('local-timeservers', [])
 	$physicalHost = $site::allnodeinfo[$fqdn]['physicalHost']
 
-	# if ($::kernel == 'Linux' and $::is_virtual and $::virtual == 'kvm'
 	#if ($systemd and $physicalHost and size($localtimeservers) > 0) {
-	if ($systemd and size($localtimeservers) > 0 and $::virt == 'kvm') {
+	if ($systemd and size($localtimeservers) > 0 and $::is_virtual and $::virtual == 'kvm') {
 		include ntp::purge
 		include systemdtimesyncd
 	} else {

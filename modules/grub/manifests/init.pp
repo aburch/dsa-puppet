@@ -1,5 +1,5 @@
 class grub {
-	if ($::kernel == 'Linux' and $::virt == 'kvm') {
+	if ($::kernel == 'Linux' and $::is_virtual and $::virtual == 'kvm') {
 		file { '/etc/default/grub':
 			# restore to default
 			source => 'puppet:///modules/grub/etc-default-grub',

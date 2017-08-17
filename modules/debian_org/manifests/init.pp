@@ -12,6 +12,13 @@ class debian_org {
 		$servicefiles = 'absent'
 	}
 
+	# the virtual facter needs virt-what on jessie to work
+	if versioncmp($::lsbmajdistrelease, '9') < 0 {
+		package { 'virt-what': ensure => installed }
+	} else {
+		package { 'virt-what': ensure => purged }
+	}
+
 	$debianadmin = [
 		'debian-archive-debian-samhain-reports@master.debian.org',
 		'debian-admin@ftbfs.de',
