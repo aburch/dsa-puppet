@@ -4,8 +4,8 @@ class time {
 	$physicalHost = $site::allnodeinfo[$fqdn]['physicalHost']
 
 	# if ($::kernel == 'Linux' and $::is_virtual and $::virtual == 'kvm'
-	# our is_virtual and virtual facts are broken
-	if ($systemd and $physicalHost and size($localtimeservers) > 0) {
+	#if ($systemd and $physicalHost and size($localtimeservers) > 0) {
+	if ($systemd and size($localtimeservers) > 0 and $::virt == 'kvm') {
 		include ntp::purge
 		include systemdtimesyncd
 	} else {
