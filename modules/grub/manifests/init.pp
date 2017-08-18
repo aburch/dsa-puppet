@@ -9,7 +9,7 @@ class grub {
 		$grub_do_kernel_serial = true
 		$grub_do_grub_serial = true
 		$grub_do_nopat = true
-	} elsif $::hostname in [mirror-skroutz,aagard,acker,arm-arm-01,fasolo] {
+	} elsif $::hostname in [mirror-skroutz,aagaard,acker,arm-arm-01,fasolo] {
 		$grub_manage = true
 		$grub_do_kernel_serial = true
 		$grub_do_grub_serial = true
