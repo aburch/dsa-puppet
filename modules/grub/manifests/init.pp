@@ -9,7 +9,7 @@ class grub {
 		$grub_do_kernel_serial = true
 		$grub_do_grub_serial = true
 		$grub_do_nopat = true
-	} elsif $::hostname in [mirror-skroutz,aagard,acker,arm-arm-01] {
+	} elsif $::hostname in [mirror-skroutz,aagard,acker,arm-arm-01,fasolo] {
 		$grub_manage = true
 		$grub_do_kernel_serial = true
 		$grub_do_grub_serial = true
@@ -23,6 +23,11 @@ class grub {
 		$grub_manage = false
 	}
 
+	if $::hostname in [fasolo] {
+		$grub_do_extra = true
+	} else {
+		$grub_do_extra = false
+	}
 
 	if $grub_manage {
 		file { '/etc/default/grub':
@@ -56,6 +61,12 @@ class grub {
 		file { '/etc/default/grub.d/puppet-kernel-nopat.cfg':
 			ensure => $grub_do_nopat ? { true  => 'present', default => 'absent' },
 			content  => template('grub/puppet-kernel-nopat.cfg.erb'),
+			notify  => Exec['update-grub']
+		}
+
+		file { '/etc/default/grub.d/puppet-kernel-extra.cfg':
+			ensure => $grub_do_extra ? { true  => 'present', default => 'absent' },
+			content  => template('grub/puppet-kernel-extra.cfg.erb'),
 			notify  => Exec['update-grub']
 		}
 	}
