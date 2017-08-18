@@ -1,8 +1,8 @@
-<%- if %w{arm-conova-01 arm-arm-01}.include?(hostname) then -%>
+<%- if %w{arm-conova-01 arm-arm-01}.include?(@hostname) then -%>
 GRUB_CMDLINE_LINUX="$GRUB_CMDLINE_LINUX console=ttyAMA0,115200n8"
-<%- elsif %w{arm-arm-03}.include?(hostname) then -%>
+<%- elsif %w{arm-arm-03}.include?(@hostname) then -%>
 GRUB_CMDLINE_LINUX="$GRUB_CMDLINE_LINUX console=ttyS0,115200"
-<%- elsif %w{aagaard acker}.include?(hostname) then -%>
+<%- elsif %w{aagaard acker}.include?(@hostname) then -%>
 GRUB_CMDLINE_LINUX="$GRUB_CMDLINE_LINUX console=ttyS0,115200 earlycon"
 <% else -%>
 GRUB_CMDLINE_LINUX="$GRUB_CMDLINE_LINUX console=tty0 console=ttyS0,115200n8"
