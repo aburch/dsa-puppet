@@ -274,7 +274,6 @@ roles:
   onionbalance:
     - olin.debian.org
   experimental_apache:
-    - beach.debian.org
     - cgi-grnet-01.debian.org
     - coccia.debian.org
     - klecker.debian.org
