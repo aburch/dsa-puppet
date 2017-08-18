@@ -277,7 +277,6 @@ roles:
     - beach.debian.org
     - cgi-grnet-01.debian.org
     - coccia.debian.org
-    - draghi.debian.org
     - klecker.debian.org
     - manziarly.debian.org
     - mirror-bytemark.debian.org
