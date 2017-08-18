@@ -4,16 +4,16 @@ class grub {
 		$grub_do_kernel_serial = true
 		$grub_do_grub_serial = true
 		$grub_do_ifnames = true
-	} elsif $::hostname in [ubc-enc2bl01,ubc-enc2bl02,ubc-enc2bl09,ubc-enc2bl10,casulana,mirror-anu,sallinen,storace,mirror-skroutz] {
+	} elsif $::hostname in [ubc-enc2bl01,ubc-enc2bl02,ubc-enc2bl09,ubc-enc2bl10,casulana,mirror-anu,sallinen,storace,mirror-accumu] {
 		$grub_manage = true
 		$grub_do_kernel_serial = true
 		$grub_do_grub_serial = true
 		$grub_do_nopat = true
-	} elsif $::hostname in [mirror-accumu] {
+	} elsif $::hostname in [mirror-skroutz] {
 		$grub_manage = true
 		$grub_do_kernel_serial = true
 		$grub_do_grub_serial = true
-		$grub_do_nopat = true
+		$grub_do_nopat = false
 	} else {
 		$grub_manage = false
 	}
