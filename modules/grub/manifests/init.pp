@@ -14,6 +14,11 @@ class grub {
 		$grub_do_kernel_serial = true
 		$grub_do_grub_serial = true
 		$grub_do_nopat = false
+	} elsif $::hostname in [acker,arm-arm-03] {
+		$grub_manage = true
+		$grub_do_kernel_serial = true
+		$grub_do_grub_serial = false
+		$grub_do_nopat = false
 	} else {
 		$grub_manage = false
 	}
