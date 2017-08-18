@@ -1,0 +1,5 @@
+<%- if scope.lookupvar('::debarchitecture') == "arm64" -%>
+GRUB_CMDLINE_LINUX="$GRUB_CMDLINE_LINUX console=ttyAMA0,115200n8"
+<% else -%>
+GRUB_CMDLINE_LINUX="$GRUB_CMDLINE_LINUX console=tty0 console=ttyS0,115200n8"
+<%- end -%>
