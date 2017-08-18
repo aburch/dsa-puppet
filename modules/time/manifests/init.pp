@@ -7,8 +7,8 @@ class time {
 	if ($systemd and size($localtimeservers) > 0 and $::is_virtual and $::virtual == 'kvm') {
 		include ntp::purge
 		include systemdtimesyncd
-	#} else {
-		#include ntp
-		#include ntpdate
+	} else {
+		include ntp
+		include ntpdate
 	}
 }
