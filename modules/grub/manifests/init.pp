@@ -8,26 +8,20 @@ class grub {
 		$grub_manage = true
 		$grub_do_kernel_serial = true
 		$grub_do_grub_serial = true
-		$grub_do_nopat = true
 	} elsif $::hostname in [mirror-skroutz,aagaard,acker,arm-arm-01,fasolo] {
 		$grub_manage = true
 		$grub_do_kernel_serial = true
 		$grub_do_grub_serial = true
-		$grub_do_nopat = false
 	} elsif $::hostname in [acker,arm-arm-03] {
 		$grub_manage = true
 		$grub_do_kernel_serial = true
 		$grub_do_grub_serial = false
-		$grub_do_nopat = false
 	} else {
 		$grub_manage = false
 	}
 
-	if $::hostname in [fasolo] {
-		$grub_do_extra = true
-	} else {
-		$grub_do_extra = false
-	}
+	$grub_do_nopat = $::hostname in [ubc-enc2bl01,ubc-enc2bl02,ubc-enc2bl09,ubc-enc2bl10,casulana,mirror-anu,sallinen,storace,mirror-accumu]
+	$grub_do_extra = $::hostname in [fasolo]
 
 	if $grub_manage {
 		file { '/etc/default/grub':
