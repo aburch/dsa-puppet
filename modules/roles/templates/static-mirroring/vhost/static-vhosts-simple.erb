@@ -8,10 +8,10 @@
 	ServerAlias cdn.debian.net
 	ServerAlias http.debian.net
 
-	Redirect /debian/           http://cdn-fastly.deb.debian.org/debian/
-	Redirect /debian-debug/     http://cdn-fastly.deb.debian.org/debian-debug/
-	Redirect /debian-ports/     http://cdn-fastly.deb.debian.org/debian-ports/
-	Redirect /debian-security/  http://cdn-fastly.deb.debian.org/debian-security/
+	Redirect /debian            http://cdn-fastly.deb.debian.org/debian
+	Redirect /debian-debug      http://cdn-fastly.deb.debian.org/debian-debug
+	Redirect /debian-ports      http://cdn-fastly.deb.debian.org/debian-ports
+	Redirect /debian-security   http://cdn-fastly.deb.debian.org/debian-security
 </Macro>
 
 <VirtualHost <%= @vhost_listen_443 %> >
@@ -40,10 +40,10 @@
 
 	AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css
 
-	Redirect /debian/           https://cdn-aws.deb.debian.org/debian/
-	Redirect /debian-debug/     https://cdn-aws.deb.debian.org/debian-debug/
-	Redirect /debian-ports/     https://cdn-aws.deb.debian.org/debian-ports/
-	Redirect /debian-security/  https://cdn-aws.deb.debian.org/debian-security/
+	Redirect /debian            https://cdn-aws.deb.debian.org/debian
+	Redirect /debian-debug      https://cdn-aws.deb.debian.org/debian-debug
+	Redirect /debian-ports      https://cdn-aws.deb.debian.org/debian-ports
+	Redirect /debian-security   https://cdn-aws.deb.debian.org/debian-security
 </VirtualHost>
 <% end -%>
 
