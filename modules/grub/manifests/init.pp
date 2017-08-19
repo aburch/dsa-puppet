@@ -31,7 +31,12 @@ class grub {
 		}
 
 		file { '/etc/default/grub.d':
-			ensure => directory
+			ensure => directory,
+			mode   => '0555',
+			purge   => true,
+			force   => true,
+			recurse => true,
+			source  => 'puppet:///files/empty/',
 		}
 
 		file { '/etc/default/grub.d/puppet-grub-serial.cfg':
