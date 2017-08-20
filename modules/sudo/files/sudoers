@@ -119,7 +119,7 @@ nagios		storace=(debbackup)	NOPASSWD: /usr/lib/nagios/plugins/dsa-check-backuppg
 %forums		ALL=(forums)	ALL
 %gitdoadm	ALL=(gitdoadm)	ALL
 # the git user also exists on adayevskaya where it's a different service..
-%gitdoadm	gigault,godard=(git)	ALL
+%gitdoadm	godard=(git)	ALL
 %keyring	ALL=(keyring)	ALL
 %jenkins-adm	ALL=(jenkins-adm)	ALL
 %lintian	ALL=(lintian)	ALL
