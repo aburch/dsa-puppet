@@ -85,3 +85,9 @@ UsePAM yes
 AuthorizedKeysFile /etc/ssh/userkeys/%u /var/lib/misc/userkeys/%u /etc/ssh/userkeys/%u.more
 
 PasswordAuthentication no
+
+Match Group sftponly
+  AllowStreamLocalForwarding no
+  AllowTCPForwarding no
+  X11Forwarding no
+  ForceCommand internal-sftp
