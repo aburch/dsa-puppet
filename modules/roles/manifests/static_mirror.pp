@@ -122,6 +122,7 @@ class roles::static_mirror {
 	ssl::service { 'mozilla.debian.net'            : ensure => "ifstatic", notify  => Exec['service apache2 reload'], key => true, }
 	ssl::service { 'news.debian.net'               : ensure => "ifstatic", notify  => Exec['service apache2 reload'], key => true, }
 	ssl::service { 'timeline.debian.net'           : ensure => "ifstatic", notify  => Exec['service apache2 reload'], key => true, }
+	ssl::service { 'video.debian.net'              : ensure => "ifstatic", notify  => Exec['service apache2 reload'], key => true, }
 	ssl::service { 'wnpp-by-tags.debian.net'       : ensure => "ifstatic", notify  => Exec['service apache2 reload'], key => true, }
 	# dc
 	ssl::service { '10years.debconf.org'           : ensure => "ifstatic", notify  => Exec['service apache2 reload'], key => true, }

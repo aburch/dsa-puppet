@@ -281,10 +281,20 @@ lines.join("\n")
 	RedirectPermanent / http://ftp.ports.debian.org/
 </VirtualHost>
 
-<VirtualHost <%= @vhost_listen %> >
+<Macro vstatic-vhost-video.debian.net>
 	ServerName video.debian.net
 	ServerAdmin debian-admin@debian.org
-	Redirect / http://meetings-archive.debian.net/pub/debian-meetings/
+	Redirect / https://meetings-archive.debian.net/pub/debian-meetings/
+</Macro>
+
+<VirtualHost <%= @vhost_listen %> >
+	Use vstatic-vhost-video.debian.net
+</VirtualHost>
+
+<VirtualHost <%= @vhost_listen_443 %> >
+	Use vstatic-vhost-video.debian.net
+	Use common-debian-service-ssl video.debian.net
+	Use common-ssl-HSTS
 </VirtualHost>
 
 # historical sites
