@@ -3,6 +3,7 @@
 ## USE: git clone git+ssh://$USER@puppet.debian.org/srv/puppet.debian.org/git/dsa-puppet.git
 ##
 
+antiharassment
 books
 cdvendors
 consultants

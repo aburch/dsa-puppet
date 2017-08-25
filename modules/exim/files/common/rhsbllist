@@ -4,6 +4,7 @@
 ##
 
 admin : bogusmx.rfc-ignorant.org/$sender_address_domain : dsn.rfc-ignorant.org/$sender_address_domain
+antiharassment : bogusmx.rfc-ignorant.org/$sender_address_domain : dsn.rfc-ignorant.org/$sender_address_domain
 books : bogusmx.rfc-ignorant.org/$sender_address_domain : dsn.rfc-ignorant.org/$sender_address_domain
 cdvendors : bogusmx.rfc-ignorant.org/$sender_address_domain : dsn.rfc-ignorant.org/$sender_address_domain
 consultants : bogusmx.rfc-ignorant.org/$sender_address_domain : dsn.rfc-ignorant.org/$sender_address_domain

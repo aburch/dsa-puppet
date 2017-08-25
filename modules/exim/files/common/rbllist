@@ -4,6 +4,7 @@
 ##
 
 admin : zen.spamhaus.org : dul.dnsbl.sorbs.net : bl.spamcop.net
+antiharassment : zen.spamhaus.org : dul.dnsbl.sorbs.net : bl.spamcop.net
 books : zen.spamhaus.org : dul.dnsbl.sorbs.net : bl.spamcop.net
 cdvendors : zen.spamhaus.org : dul.dnsbl.sorbs.net : bl.spamcop.net
 consultants : zen.spamhaus.org : dul.dnsbl.sorbs.net : bl.spamcop.net
