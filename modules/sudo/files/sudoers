@@ -249,7 +249,6 @@ debwww		WEBHOSTS=(archvsync)	NOPASSWD: /home/archvsync/webmirrors/runmirrors
 %d-i		WEBHOSTS=(debwww)	/srv/www.debian.org/cron/lessoften-parts/1installation-guide
 # more list stuff
 %list		LISTHOSTS=(root)		/usr/sbin/postfix reload
-%list		stockhausen=(root)		/usr/sbin/service jetty restart
 %list		LISTHOSTS=(root)		/usr/sbin/qshape, /usr/sbin/postsuper
 %list		LISTHOSTS=(root)		/etc/init.d/spamassassin, /etc/init.d/amavis
 %list		LISTHOSTS=(amavis)		NOPASSWD: /usr/bin/sa-learn

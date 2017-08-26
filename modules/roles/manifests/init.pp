@@ -175,10 +175,6 @@ class roles {
 		include roles::lists
 	}
 
-	if has_role('list_search') {
-		include roles::listsearch
-	}
-
 	if has_role('rtmaster') {
 		include roles::rtmaster
 	}
