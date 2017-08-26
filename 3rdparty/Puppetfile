@@ -8,7 +8,6 @@ mod 'puppetlabs/concat', '1.2.2'
 mod 'puppetlabs/rabbitmq', '5.2.1'
 mod 'puppetlabs/inifile', '1.3.0'
 
-mod 'elasticsearch/elasticsearch', '0.9.5'
 mod 'nanliu/staging', '1.0.3'
 
 # OpenStack
