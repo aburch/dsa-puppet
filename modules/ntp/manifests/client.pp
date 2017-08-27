@@ -17,10 +17,10 @@ class ntp::client {
 		source => 'puppet:///modules/ntp/ntpkey_iff_bm-bl2.pub',
 	}
 	file { '/etc/ntp.keys.d/ntpkey_iff_ubc-bl2':
-		source => 'puppet:///modules/ntp/ntpkey_iff_ubc-bl2.pub',
+		ensure => absent,
 	}
 	file { '/etc/ntp.keys.d/ntpkey_iff_ubc-bl6':
-		source => 'puppet:///modules/ntp/ntpkey_iff_ubc-bl6.pub',
+		ensure => absent,
 	}
 	file { '/etc/ntp.keys.d/ntpkey_iff_dijkstra':
 		ensure => absent,
