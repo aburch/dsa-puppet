@@ -4,7 +4,7 @@ class grub {
 		$grub_do_kernel_serial = true
 		$grub_do_grub_serial = true
 		$grub_do_ifnames = true
-	} elsif $::hostname in [ubc-enc2bl01,ubc-enc2bl02,ubc-enc2bl09,ubc-enc2bl10,casulana,mirror-anu,sallinen,storace,mirror-accumu] {
+	} elsif $::hostname in [ubc-enc2bl01,ubc-enc2bl02,ubc-enc2bl09,ubc-enc2bl10,casulana,mirror-anu,sallinen,storace,mirror-accumu,bm-bl1,bm-bl2,bm-bl3,bm-bl4,bm-bl5,bm-bl6,bm-bl7,bm-bl8,bm-bl9,bm-bl10,bm-bl11,bm-bl12,bm-bl13,bm-bl14] {
 		$grub_manage = true
 		$grub_do_kernel_serial = true
 		$grub_do_grub_serial = true
@@ -20,7 +20,7 @@ class grub {
 		$grub_manage = false
 	}
 
-	$grub_do_nopat = $::hostname in [ubc-enc2bl01,ubc-enc2bl02,ubc-enc2bl09,ubc-enc2bl10,casulana,mirror-anu,sallinen,storace,mirror-accumu]
+	$grub_do_nopat = $::hostname in [ubc-enc2bl01,ubc-enc2bl02,ubc-enc2bl09,ubc-enc2bl10,casulana,mirror-anu,sallinen,storace,mirror-accumu,bm-bl1,bm-bl2,bm-bl3,bm-bl4,bm-bl5,bm-bl6,bm-bl7,bm-bl8,bm-bl9,bm-bl10,bm-bl11,bm-bl12,bm-bl13,bm-bl14]
 	$grub_do_extra = $::hostname in [fasolo]
 
 	if $grub_manage {
