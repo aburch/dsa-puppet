@@ -222,10 +222,6 @@ class roles {
 		include roles::jenkins
 	}
 
-	if has_role('memcached') {
-		include roles::memcached
-	}
-
 	if has_role('postgres_backup_server') {
 		include postgres::backup_server
 	}
