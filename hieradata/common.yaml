@@ -52,9 +52,6 @@ roles:
     - jerea.debian.org
   keyring:
     - kaufmann.debian.org
-  keystone_rabbitmq:
-    - rainier.debian.org
-    - rapoport.debian.org
   lists:
     - bendel.debian.org
   mailrelay:
