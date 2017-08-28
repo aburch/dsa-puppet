@@ -8,4 +8,3 @@ mod 'nanliu/staging', '1.0.3'
 
 # OpenStack
 mod 'duritong/sysctl', '0.0.11' 
-mod 'saz/memcached', '2.8.1'
