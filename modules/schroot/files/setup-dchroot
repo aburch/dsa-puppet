@@ -395,7 +395,7 @@ cleanup+=("rm -f $tartmp")
   chmod 0755 "$rootdir"
   tar caf "$tartmp" .
   if ! [ -z "$keep" ]; then
-    savelog -l -c 4 "$target"
+    savelog -l -c 2 "$target"
   fi
   mv "$tartmp" "$target"
 )
