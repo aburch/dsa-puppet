@@ -76,7 +76,13 @@ class nagios::client inherits nagios {
 		ensure => absent,
 	}
 
-	file { '/etc/cron.d/puppet-nagios-wraps':
-		content  => "47 * * * * root /usr/sbin/dsa-wrap-nagios-check -s puppet-agent /usr/lib/nagios/plugins/dsa-check_puppet_agent -d0 -c 28800 -w 18000\n",
+	concat { '/etc/cron.d/puppet-nagios-wraps': }
+	concat::fragment { 'dsa-check_puppet_agent':
+		target => '/etc/cron.d/puppet-nagios-wraps',
+		content  => @(EOF)
+			SHELL=/bin/bash
+			PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/lib/nagios/plugins
+			47 * * * * root dsa-wrap-nagios-check -s puppet-agent dsa-check_puppet_agent -d0 -c 28800 -w 18000
+			| EOF
 	}
 }
