@@ -11,6 +11,21 @@ Facter.add("smartarraycontroller") do
 	end
 end
 
+Facter.add("smartarraycontroller_cciss") do
+	confine :kernel => :linux
+	setcode do
+		FileTest.exist?("/dev/cciss/")
+	end
+end
+
+Facter.add("smartarraycontroller_hpsa") do
+	confine :kernel => :linux
+	setcode do
+		FileTest.exist?("/sys/module/hpsa/")
+	end
+end
+
+
 Facter.add("ThreeWarecontroller") do
 	confine :kernel => :linux
 	setcode do
