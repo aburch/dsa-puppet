@@ -1,5 +1,5 @@
 class hardware::raid::proliant {
-	if $::smartarraycontroller {
+	if $::smartarraycontroller_hpsa or $::smartarraycontroller_cciss {
 		site::aptrepo { 'debian.restricted':
 			url        => 'http://db.debian.org/debian-admin',
 			suite      => "${::lsbdistcodename}-restricted",
