@@ -32,7 +32,7 @@ class hardware::raid::proliant {
 				target => '/etc/cron.d/puppet-nagios-wraps',
 				order  => '020',
 				content  => @(EOF)
-					27 * * * * root sleep $(( $RANDOM \% 900 )); dsa-wrap-nagios-check dsa-check-hpssacli
+					27 */2 * * * root sleep $(( $RANDOM \% 900 )); dsa-wrap-nagios-check dsa-check-hpssacli
 					| EOF
 			}
 		}
