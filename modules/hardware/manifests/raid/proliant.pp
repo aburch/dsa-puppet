@@ -30,6 +30,7 @@ class hardware::raid::proliant {
 		if $::smartarraycontroller_hpsa {
 			concat::fragment { 'dsa-check-hpssacli':
 				target => '/etc/cron.d/puppet-nagios-wraps',
+				order  => '020',
 				content  => @(EOF)
 					27 * * * * root sleep $(( $RANDOM \% 900 )); dsa-wrap-nagios-check dsa-check-hpssacli
 					| EOF

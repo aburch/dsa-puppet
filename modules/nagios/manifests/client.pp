@@ -77,11 +77,18 @@ class nagios::client inherits nagios {
 	}
 
 	concat { '/etc/cron.d/puppet-nagios-wraps': }
-	concat::fragment { 'dsa-check_puppet_agent':
+	concat::fragment { 'puppet-nagios-wraps--header':
 		target => '/etc/cron.d/puppet-nagios-wraps',
+		order  => '000',
 		content  => @(EOF)
 			SHELL=/bin/bash
 			PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/lib/nagios/plugins
+			| EOF
+	}
+	concat::fragment { 'dsa-check_puppet_agent':
+		target => '/etc/cron.d/puppet-nagios-wraps',
+		order  => '010',
+		content  => @(EOF)
 			47 * * * * root dsa-wrap-nagios-check -s puppet-agent dsa-check_puppet_agent -d0 -c 28800 -w 18000
 			| EOF
 	}
