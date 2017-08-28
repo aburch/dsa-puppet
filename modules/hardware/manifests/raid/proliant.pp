@@ -35,7 +35,7 @@ class hardware::raid::proliant {
 			content  => @(EOF)
 				SHELL=/bin/bash
 				PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/lib/nagios/plugins
-				42 * * * 0 root sleep $(( $RANDOM \% 900 )); dsa-wrap-nagios-check dsa-check-hpssacli
+				42 */2 * * 0 root sleep $(( $RANDOM \% 900 )); dsa-wrap-nagios-check dsa-check-hpssacli
 				| EOF
 
 		}
