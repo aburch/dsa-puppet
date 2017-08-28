@@ -7,10 +7,6 @@
 #   include motd
 #
 class motd {
-	file { '/etc/update-motd.d':
-		ensure => directory,
-		mode   => '0755'
-	}
 	file { '/etc/motd.tail':
 		ensure => absent,
 	}
@@ -20,16 +16,22 @@ class motd {
 			ensure => link,
 			target => '/var/run/motd'
 		}
-	} else {
-		file { '/etc/motd':
-			ensure => link,
-			target => '/run/motd.dynamic'
+		file { '/etc/update-motd.d':
+			ensure => directory,
+			mode   => '0755'
 		}
-	}
-
-	file { '/etc/update-motd.d/puppet-motd':
-		notify  => undef,
-		mode    => '0555',
-		content => template('motd/motd.erb')
+		file { '/etc/update-motd.d/puppet-motd':
+			notify  => undef,
+			mode    => '0555',
+			content => template('motd/motd.erb')
+		}
+	} else {
+		file { '/etc/update-motd.d/puppet-motd':
+			ensure => absent,
+		}
+		file { '/etc/motd':
+			notify  => undef,
+			content => template('motd/motd.erb')
+		}
 	}
 }

@@ -1,6 +1,8 @@
+<%- if scope.call_function('versioncmp', [@lsbmajdistrelease, '8']) <= 0 -%>
 #!/bin/bash
 
 cat <<EOD
+<%- end -%>
 
 This device is for authorized users only.  All traffic on this device
 is monitored and will be used as evidence for prosecutions.  By using
@@ -141,7 +143,9 @@ purp
 -%>
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+<%- if scope.call_function('versioncmp', [@lsbmajdistrelease, '8']) <= 0 -%>
 EOD
+<%- end -%>
 <%
 # vim:set et:
 # vim:set sts=2 ts=2:
