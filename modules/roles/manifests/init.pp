@@ -326,4 +326,8 @@ class roles {
 	if has_role('bacula_storage') {
 		include bacula::storage
 	}
+
+	if $::keyring_debian_org_mirror {
+		include roles::keyring_debian_org_mirror
+	}
 }
