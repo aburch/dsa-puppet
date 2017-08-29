@@ -130,6 +130,8 @@ roles:
     - mirror-bytemark.debian.org
   security_tracker:
     - soriano.debian.org
+  security_upload:
+    - suchon.debian.org
   ssh.upload.d.o:
     - coccia.debian.org
     - suchon.debian.org

@@ -84,6 +84,9 @@ class roles {
 	if has_role('ssh.upload.d.o') {
 		include roles::ssh_upload
 	}
+	if has_role('security_upload') {
+		include roles::security_upload
+	}
 	if has_role('api.ftp-master') {
 		ssl::service { 'api.ftp-master.debian.org':
 			notify  => Exec['service apache2 reload'],
