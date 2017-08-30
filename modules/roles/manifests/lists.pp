@@ -3,11 +3,4 @@ class roles::lists {
 		notify  => Exec['service apache2 reload'],
 		key => true,
 	}
-
-	dnsextras::tlsa_record{ 'tlsa-mailport':
-		zone     => 'debian.org',
-		certfile => "/etc/puppet/modules/exim/files/certs/${::fqdn}.crt",
-		port     => 25,
-		hostname => $::fqdn,
-	}
 }
