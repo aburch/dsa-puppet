@@ -1,0 +1,36 @@
+# postfix main.cf
+
+mydomain = debian.org
+compatibility_level = 2
+smtp_dns_support_level = dnssec
+
+<%- if scope.lookupvar('site::nodeinfo')['smarthost'].empty? -%>
+smtp_tls_security_level = dane
+<%- else -%>
+smtp_tls_security_level = dane-only
+# yes, do MX lookups on the relayhost, since those have TLSA records
+relayhost = <%= scope.lookupvar('site::nodeinfo')['smarthost'] %>:submission
+<%- end -%>
+
+# tls stuff
+#
+smtpd_use_tls = yes
+smtpd_tls_cert_file = /etc/ssl/debian/certs/thishost-server.crt
+smtpd_tls_key_file = /etc/ssl/private/thishost-server.key
+smtpd_tls_CAfile = /etc/ssl/debian/certs/ca.crt
+smtpd_tls_received_header = yes
+smtpd_tls_loglevel = 1
+
+smtp_use_tls = yes
+smtp_tls_cert_file = /etc/ssl/debian/certs/thishost.crt
+smtp_tls_key_file = /etc/ssl/private/thishost.key
+smtp_tls_CAfile = /etc/ssl/debian/certs/ca.crt
+smtp_tls_note_starttls_offer = yes
+smtp_tls_loglevel = 1
+
+smtpd_tls_fingerprint_digest = sha256
+smtp_tls_fingerprint_digest = sha256
+
+smtpd_tls_session_cache_database = btree:${data_directory}/smtpd_scache
+smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
+
