@@ -8,6 +8,7 @@ class exim {
 	$is_packagesqamaster = has_role('packagesqamaster')
 
 	include exim::vdomain::setup
+	include debian_org::mail_incoming_port
 
 	munin::check { 'ps_exim4': script => 'ps_' }
 	munin::check { 'exim_mailqueue': }
@@ -133,29 +134,6 @@ class exim {
 		mode    => '2750',
 		owner   => 'Debian-exim',
 		group   => maillog,
-	}
-
-	case getfromhash($site::nodeinfo, 'mail_port') {
-                Numeric: { $mail_port = sprintf("%d", getfromhash($site::nodeinfo, 'mail_port')) }
-		/^(\d+)$/: { $mail_port = $1 }
-		default: { $mail_port = '25' }
-	}
-
-	@ferm::rule { 'dsa-exim':
-		description => 'Allow SMTP',
-		rule        => "&SERVICE_RANGE(tcp, $mail_port, \$SMTP_SOURCES)"
-	}
-
-	@ferm::rule { 'dsa-exim-v6':
-		description => 'Allow SMTP',
-		domain      => 'ip6',
-		rule        => "&SERVICE_RANGE(tcp, $mail_port, \$SMTP_V6_SOURCES)"
-	}
-	dnsextras::tlsa_record{ 'tlsa-mailport':
-		zone     => 'debian.org',
-		certfile => "/etc/puppet/modules/exim/files/certs/${::fqdn}.crt",
-		port     => $mail_port,
-		hostname => $::fqdn,
 	}
 
 	# Do we actually want this?  I'm only doing it because it's harmless
