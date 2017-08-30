@@ -17,6 +17,10 @@ module Puppet::Parser::Functions
         unless nodeinfo['heavy_exim']
           nodeinfo['smarthost'] = 'mailout.debian.org'
         end
+      elsif lookupvar('::mta') == 'postfix'
+        unless nodeinfo['heavy_postfix']
+          nodeinfo['smarthost'] = 'mailout.debian.org'
+        end
       end
 
       nodeinfo['misc'] = {}

@@ -120,6 +120,8 @@ footer:
   #zandonai.debian.org: "Debian s390 buildd system kindly provided by Zentrum fuer Informationsverarbeitung und Informationstechnik [zivit]"
   #zelenka.debian.org: "Debian s390 porter system kindly provided by Zentrum fuer Informationsverarbeitung und Informationstechnik [zivit]"
 host_settings:
+  heavy_postfix:
+    - bendel.debian.org
   heavy_exim:
     # mail front-ends
     - mailly.debian.org
