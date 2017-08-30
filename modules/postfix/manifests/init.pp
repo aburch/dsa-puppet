@@ -1,5 +1,4 @@
 class postfix {
-
 	package { 'postfix':
 		ensure => installed
 	}
@@ -18,9 +17,11 @@ class postfix {
 	munin::check { 'ps_smtp': script => 'ps_' }
 	munin::check { 'ps_smtpd': script => 'ps_' }
 
-	@ferm::rule { 'smtp':
-		domain      => '(ip ip6)',
-		description => 'Allow smtp access',
-		rule        => '&SERVICE(tcp, 25)'
+	if has_role('lists') {
+		@ferm::rule { 'smtp':
+			domain      => '(ip ip6)',
+			description => 'Allow smtp access',
+			rule        => '&SERVICE(tcp, 25)'
+		}
 	}
 }
