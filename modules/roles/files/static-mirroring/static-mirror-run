@@ -62,13 +62,14 @@ SYNC_SOURCE=${1:-}; shift
 SYNC_SERIAL=${1:-}; shift || true
 if [ -z "$COMPONENTDIR" ]; then usage >&2; exit 1; fi
 if [ -z "$SYNC_SOURCE" ]; then usage >&2; exit 1; fi
+COMPONENT=$(basename ${COMPONENTDIR})
 
 RSYNC="rsync"
 RSYNC_BASE_OPTIONS="-rtvz --delete --links --hard-links --safe-links"
 RSYNC_SSH_OPTIONS="ssh -o AddressFamily=inet -o BatchMode=yes"
 
 LOGDIR="$HOME/logs"
-LOGFILE="$LOGDIR/$NAME-run.log"
+LOGFILE="$LOGDIR/$NAME-run-${COMPONENT}.log"
 
 
 ALPHA="tree-a"
