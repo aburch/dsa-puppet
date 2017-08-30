@@ -313,4 +313,10 @@ class debian_org {
 	file { '/root/.vimrc':
 		source => 'puppet:///modules/debian_org/root-dotfiles/vimrc',
 	}
+
+	if versioncmp($::lsbmajdistrelease, '9') >= 0 { # older puppets do facts as strings.
+		if $::processorcount > 1 {
+			package { 'irqbalance': ensure => installed }
+		}
+	}
 }
