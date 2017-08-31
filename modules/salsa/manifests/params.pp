@@ -4,5 +4,7 @@ class salsa::params {
 	$group = "git"
 	$home = "/srv/salsa.debian.org"
 
-	# $salsa_   = hkdf('/etc/puppet/secret', "bacula-dir-${::hostname}")
+	$db_name = "salsa"
+	$db_role = "salsa"
+	$db_password = hkdf('/etc/puppet/secret', "postgresql-${::hostname}-salsa-${db_role}")
 }
