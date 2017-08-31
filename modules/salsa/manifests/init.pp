@@ -1,13 +1,5 @@
 #
-class salsa (
-	$user = $salsa::params::user,
-	$group = $salsa::params::group,
-	$home = $salsa::params::home,
-
-	$db_name = $salsa::params::db_name,
-	$db_role = $salsa::params::db_role,
-	$db_password = $salsa::params::db_password,
-) inherits salsa::params {
+class salsa inherits salsa::params {
 
 	# anchor things in correct order
 	anchor { 'salsa::begin': } ->
@@ -39,6 +31,9 @@ class salsa (
 				  name: "${salsa::db_name}"
 				  role: "${salsa::db_role}"
 				  password: "${salsa::db_password}"
+				mail:
+				  username: "${salsa::mail_username}"
+				  password: "${salsa::mail_password}"
 				| EOF
 	}
 }

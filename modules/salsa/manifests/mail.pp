@@ -29,12 +29,13 @@ class salsa::mail inherits salsa {
 		group => '_vmail',
 	}
 
+	$pw_salt = hkdf('/etc/puppet/secret', "mail-imap-dovecot-${::hostname}-salsa-${mail_username}-salt-generator")
+	$hashed_pw = pw_hash($salsa::mail_password, 'SHA-512', $pw_salt)
 	file { '/etc/dovecot/users':
-		# XXX fix uid/git/password
 		mode => '440',
 		group => 'dovecot',
-		content  => @(EOF),
-				gitlab:$6$PoaX25m/P52bFbEU$tguOOYZZvOD49cmtlrqgRL4nKluakaVudPYOKkEcDZu/fZXXxyqjga9HypFwmBrj3uSP/wt2rqq7BNy22MlU90:::
+		content  => @("EOF"),
+				${salsa::mail_username}:${hashed_pw}:::
 				| EOF
 	}
 
