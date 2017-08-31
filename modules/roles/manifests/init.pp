@@ -330,6 +330,10 @@ class roles {
 		include bacula::storage
 	}
 
+	if has_role('salsa.debian.org') {
+		include salsa
+	}
+
 	if $::keyring_debian_org_mirror {
 		include roles::keyring_debian_org_mirror
 	}
