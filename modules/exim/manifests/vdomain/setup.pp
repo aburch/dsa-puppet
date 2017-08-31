@@ -9,7 +9,7 @@ class exim::vdomain::setup {
 
 	concat::fragment { 'virtualdomains_header':
 		target => '/etc/exim4/virtualdomains',
-		source => 'puppet:///modules/exim/virtualdomains.header',
+		content => template('exim/virtualdomains.header.erb'),
 		order  => '00',
 	}
 }
