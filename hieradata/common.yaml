@@ -310,3 +310,5 @@ roles:
     - seger.debian.org
     - sibelius.debian.org
     - vittoria.debian.org
+  salsa.debian.org:
+    - godard.debian.org
