@@ -30,8 +30,7 @@ would return: false
     EOS
   ) do |arguments|
 
-    raise(Puppet::ParseError, "member(): Wrong number of arguments " +
-      "given (#{arguments.size} for 2)") if arguments.size < 2
+    raise(Puppet::ParseError, "member(): Wrong number of arguments given (#{arguments.size} for 2)") if arguments.size < 2
 
     array = arguments[0]
 
@@ -44,14 +43,13 @@ would return: false
     end
 
     if arguments[1].is_a? String or arguments[1].is_a? Fixnum
-      item = Array(arguments[1])
+      item = [arguments[1]]
     else
       item = arguments[1]
     end
 
 
-    raise(Puppet::ParseError, 'member(): You must provide item ' +
-      'to search for within array given') if item.respond_to?('empty?') && item.empty?
+    raise(Puppet::ParseError, 'member(): You must provide item to search for within array given') if item.respond_to?('empty?') && item.empty?
 
     result = (item - array).empty?
 
