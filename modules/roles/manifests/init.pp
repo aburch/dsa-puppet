@@ -317,7 +317,7 @@ class roles {
 	}
 
 	if has_role('postgresql_server') {
-		include roles::postgresql_server
+		include postgres::backup_source
 	}
 
 	if has_role('bacula_director') {

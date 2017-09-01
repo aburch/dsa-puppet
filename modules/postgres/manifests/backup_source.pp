@@ -1,4 +1,4 @@
-class roles::postgresql_server {
+class postgres::backup_source {
 	file { "/usr/local/bin/pg-backup-file":
 		mode    => '0555',
 		source  => "puppet:///modules/roles/postgresql_server/pg-backup-file",
