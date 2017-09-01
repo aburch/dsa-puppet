@@ -33,7 +33,6 @@ class syslog_ng {
 
 	if $systemd {
 		file { '/etc/systemd/system/syslog-ng.service':
-			ensure => $servicefiles,
 			source => 'puppet:///modules/syslog_ng/syslog-ng.service',
 			notify => Exec['systemctl daemon-reload'],
 		}
