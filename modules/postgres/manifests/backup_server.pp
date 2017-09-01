@@ -20,6 +20,7 @@ class postgres::backup_server {
 	}
 
 	concat { $postgres::backup_server::globals::make_base_backups:
+		mode => '0555',
 	}
 	concat::fragment { 'make-base-backups-header':
 		target => $postgres::backup_server::globals::make_base_backups,
