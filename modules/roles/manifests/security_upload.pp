@@ -5,4 +5,12 @@ class roles::security_upload {
 		owner	=> dak,
 		group	=> debadmin,
 	}
+
+	vsftpd::site { 'security-upload':
+		banner     => 'ftp.security.upload.debian.org FTP server',
+		logfile    => '/var/log/ftp/vsftpd-security.upload.debian.org.log',
+		writable   => true,
+		chown_user => dak-unpriv,
+		root       => '/srv/security.upload.debian.org/ftp',
+	}
 }
