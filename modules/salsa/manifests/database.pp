@@ -35,4 +35,10 @@ class salsa::database inherits salsa {
 			tag     => "postgresql::server::backup-source-sshkey",
 		}
 	}
+
+	@ferm::rule { "dsa-postgres-${postgresql::params::port}":
+		description => 'Allow postgress access from backup host',
+		domain      => '(ip ip6)',
+		rule        => "&SERVICE_RANGE(tcp, ${postgresql::params::port}, ( @ipfilter(\$HOST_PGBACKUPHOST) ))",
+	}
 }
