@@ -220,7 +220,7 @@ ports = []
 out = "daemon_smtp_ports = "
 ports << 25
 
-if @is_bugsmaster or @is_bugsmx
+if @is_bugsmx
   ports << 587
 end
 
@@ -317,7 +317,7 @@ acl_getprofile:
   accept  condition      = ${if eq {$acl_m_rprf}{}{no}{yes}}
 
 <%- end -%>
-<%- if @is_bugsmaster or @is_bugsmx -%>
+<%- if @is_bugsmx -%>
   warn    domains        = bugs.debian.org
           set acl_m_rprf = BugsMail
 
@@ -1468,11 +1468,8 @@ virt_users:
 
 <%=
 out = ""
-if @is_bugsmaster or @is_bugsmx
+if @is_bugsmx
   domain = 'bugs.debian.org'
-  if @is_bugsmaster
-    domain = 'bugs-master.debian.org'
-  end
   out = '
 # This router delivers for bugs.d.o
 bugs:
@@ -1622,7 +1619,7 @@ bsmtp:
 		     {$value}fail}\
 		   }}
 
-<%- if @is_bugsmaster or @is_bugsmx -%>
+<%- if @is_bugsmx -%>
 bugs_pipe:
   driver = pipe
   command = /srv/bugs.debian.org/mail/run-procmail

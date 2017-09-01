@@ -1,7 +1,6 @@
 class exim {
 
 	$is_mailrelay = has_role('mailrelay')
-	$is_bugsmaster = has_role('bugsmaster')
 	$is_bugsmx = has_role('bugsmx')
 	$is_rtmaster = has_role('rtmaster')
 	$is_packagesmaster = has_role('packagesmaster')
