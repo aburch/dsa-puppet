@@ -24,7 +24,9 @@ class postgres::backup_source {
 		postgres::backup_cluster { $::hostname:
 			pg_version => '9.6',
 		}
+	}
 
+	if $::hostname in [melartin, godard] {
 		postgres::backup_server::register_backup_clienthost { "backup-clienthost-${::fqdn}}":
 		}
 	}

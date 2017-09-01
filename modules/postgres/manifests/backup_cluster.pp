@@ -9,8 +9,6 @@ define postgres::backup_cluster(
 	$do_role = false,
 	$do_hba = false,
 ) {
-	warning("foo ${backup_servers}")
-
 	$datadir = "/var/lib/postgresql/${pg_version}/${pg_cluster}"
 	file { "${datadir}/.nobackup":
 		content  => ""
@@ -45,7 +43,7 @@ define postgres::backup_cluster(
 		rule        => "&SERVICE_RANGE(tcp, ${pg_port}, ( @ipfilter((${backup_servers_addrs_joined})) ))",
 	}
 
-	postgres::backup_server::register_backup_cluster { "backup-role-${::fqdn}}-${::pg_port}":
+	postgres::backup_server::register_backup_cluster { "backup-role-${::fqdn}}-${pg_port}":
 		pg_port => $pg_port,
 		pg_role => $db_backup_role,
 		pg_password => $db_backup_role_password,

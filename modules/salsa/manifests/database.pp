@@ -41,48 +41,10 @@ class salsa::database inherits salsa {
 		}
 	}
 
-	$datadir = assert_type(String[1], $postgresql::params::datadir)
-	warning("foo ")
-	file { "${datadir}/.nobackup":
-		content  => ""
+	postgres::backup_cluster { $::hostname:
+		pg_version => $postgresql::params::version,
+		pg_port => $postgresql::params::port,
+		do_role => true,
+		do_hba => true,
 	}
-	if $::postgresql_key {
-		$ipaddr = assert_type(String[1], join(getfromhash($site::nodeinfo, 'ldap', 'ipHostNumber'), ","))
-
-		@@concat::fragment { "onion::balance::instance::dsa-snippet::$name::$fqdn":
-			target  => "/etc/dsa/postgresql-backup/sshkeys-sources",
-			content  => @("EOF"),
-					${::hostname} ${ipaddr} ${::postgresql_key}
-					| EOF
-			tag     => "postgresql::server::backup-source-sshkey",
-		}
-	}
-
-	$db_backup_role = 'debian-backup'
-	$db_backup_role_password = hkdf('/etc/puppet/secret', "postgresql-${::hostname}-${postgresql::params::port}-backup_role}")
-
-	# XXX - get these from the roles and ldap
-	$db_backup_hosts = ['5.153.231.12/32', '93.94.130.161/32', '2001:41c8:1000:21::21:12/128', '2a02:158:380:280::161/128']
-
-	postgresql::server::role { $db_backup_role:
-		password_hash => postgresql_password($db_backup_role, $db_backup_role_password),
-		replication => true,
-	}
-	$db_backup_hosts.each |String $address| {
-		postgresql::server::pg_hba_rule { "debian_backup-${address}":
-			description => 'Open up PostgreSQL for backups',
-			type        => 'hostssl',
-			database    => 'replication',
-			user        => $db_backup_role,
-			address     => $address,
-			auth_method => 'md5',
-		}
-	}
-	@ferm::rule { "dsa-postgres-${postgresql::params::port}":
-		description => 'Allow postgress access from backup host',
-		domain      => '(ip ip6)',
-		rule        => "&SERVICE_RANGE(tcp, ${postgresql::params::port}, ( @ipfilter(\$HOST_PGBACKUPHOST) ))",
-	}
-
-	# add cluster to make-base-backups
 }
