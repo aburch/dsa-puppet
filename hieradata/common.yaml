@@ -302,6 +302,7 @@ roles:
     - tchaikovsky.debian.org
     - wuiet.debian.org
   postgresql_server:
+    # postgresql instances not managed by puppet otherwise
     - bmdb1.debian.org
     - buxtehude.debian.org
     - danzi.debian.org
