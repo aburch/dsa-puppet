@@ -18,8 +18,8 @@ class salsa::database inherits salsa {
 		require => Class['postgresql::server::contrib'],
 	}
 
-	# XXX set up backups
-	file { "/var/lib/postgresql/9.6/main/.nobackup":
+	$datadir = assert_type(String[1], $postgresql::params::datadir)
+	file { "${datadir}/.nobackup":
 		content  => ""
 	}
 }
