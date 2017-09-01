@@ -13,6 +13,10 @@ class roles::security_upload {
 		group   => debadmin,
 	}
 
+	vsftpd::site { 'ftp-upload':
+		ensure     => absent,
+	}
+
 	vsftpd::site { 'security-upload':
 		banner     => 'ftp.security.upload.debian.org FTP server',
 		logfile    => '/var/log/ftp/vsftpd-security.upload.debian.org.log',
