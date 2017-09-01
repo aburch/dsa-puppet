@@ -1,3 +1,4 @@
+#
 class postgres {
 	$ensure = ($::postgres) ? {
 		true    => 'present',

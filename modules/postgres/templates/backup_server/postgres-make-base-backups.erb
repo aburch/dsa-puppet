@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # run a bunch of full postgresql backups
+# vim:syn=sh:
 
 
 # Copyright 2014 Peter Palfrader
@@ -67,6 +68,7 @@ thishost=$(hostname -f)
 
 while read host port username  cluster version; do
 	[ "${host#\#}" = "$host" ] || continue
+	[ -z "$host" ] && continue
 
 	if [ -n "$forcehostport" ] && [ "$forcehostport" != "$host:$port" ]; then
 		[ "$verbose" -gt 0 ] && echo "Skipping $host:$port $version/$cluster."
@@ -101,5 +103,6 @@ buxtehude.debian.org	5441	debian-backup		debbugs		9.6
 <%- if @hostname != "backuphost" -%>
 moszumanska.debian.org	5432	debian-backup		main		9.1
 <%- end -%>
-EOF
-# vim:syn=sh:
+#
+# puppet notice:  this is just a partial file.  The tail EOF comes
+# from a different concat fragment

@@ -1,3 +1,4 @@
+#
 class postgres::backup_source {
 	file { "/usr/local/bin/pg-backup-file":
 		mode    => '0555',
@@ -15,6 +16,16 @@ class postgres::backup_source {
 		exec { 'create-postgresql-key':
 			command => '/bin/su - postgres -c \'mkdir -p -m 02700 .ssh && ssh-keygen -C "`whoami`@`hostname` (`date +%Y-%m-%d`)" -P "" -f .ssh/id_rsa -q\'',
 			onlyif  => '/usr/bin/getent passwd postgres > /dev/null && ! [ -e /var/lib/postgresql/.ssh/id_rsa ]'
+		}
+	}
+
+
+	if $::hostname in [melartin] {
+		postgres::backup_cluster { $::hostname:
+			pg_version => '9.6',
+		}
+
+		postgres::backup_server::register_backup_clienthost { "backup-clienthost-${::fqdn}}":
 		}
 	}
 }
