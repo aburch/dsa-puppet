@@ -1,7 +1,12 @@
 #
 class salsa::database inherits salsa {
-	include postgresql::server
-	ensure_packages ( "postgresql-contrib-9.6", { ensure => 'installed' })
+	class { 'postgresql::globals':
+		version => '9.6',
+	}
+	class { 'postgresql::server':
+		listen_addresses => '*',
+	}
+	class { 'postgresql::server::contrib': }
 
 	postgresql::server::db { $salsa::db_name:
 		user     => $salsa::db_role,
@@ -10,7 +15,7 @@ class salsa::database inherits salsa {
 
 	postgresql::server::extension { 'pg_trgm':
 		database => $salsa::db_name,
-		require => Package['postgresql-contrib-9.6'],
+		require => Class['postgresql::server::contrib'],
 	}
 
 	# XXX set up backups
