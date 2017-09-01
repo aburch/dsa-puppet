@@ -26,7 +26,7 @@ set -e
 set -u
 
 MYLOGNAME="`basename "$0"`[$$]"
-RSYNCDIR="/srv/upload.debian.org/UploadQueue/"
+RSYNCDIRS=(/srv/upload.debian.org/UploadQueue/ /srv/security.upload.debian.org/SecurityUploadQueue/)
 
 usage() {
 	echo "local Usage: $0 <host>"
@@ -56,11 +56,14 @@ do_rsync() {
 	local allowed_rsyncs
 	allowed_rsyncs=()
 
-	if [ -d "$RSYNCDIR" ]; then
-		allowed_rsyncs+=("--server -vlogDtprxze.iLsf --partial . $RSYNCDIR") # wheezy
-		allowed_rsyncs+=("--server -vlogDtprxze.iLsfx --partial . $RSYNCDIR") # jessie
-		allowed_rsyncs+=("--server -vlogDtprxze.iLsfxC --partial . $RSYNCDIR") # stretch
-	fi
+	local rsyncdir
+	for rsyncdir in "${RSYNCDIRS[@]}"; do
+		if [ -d "$rsyncdir" ]; then
+			allowed_rsyncs+=("--server -vlogDtprxze.iLsf --partial . $rsyncdir") # wheezy
+			allowed_rsyncs+=("--server -vlogDtprxze.iLsfx --partial . $rsyncdir") # jessie
+			allowed_rsyncs+=("--server -vlogDtprxze.iLsfxC --partial . $rsyncdir") # stretch
+		fi
+	done
 	for cmd_idx in ${!allowed_rsyncs[*]}; do
 		allowed="${allowed_rsyncs[$cmd_idx]}"
 		if [ "$*" = "$allowed" ]; then
