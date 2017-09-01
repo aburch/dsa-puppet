@@ -1,0 +1,57 @@
+#!/bin/bash
+
+# Copyright 2017 Peter Palfrader
+#
+# Permission is hereby granted, free of charge, to any person obtaining
+# a copy of this software and associated documentation files (the
+# "Software"), to deal in the Software without restriction, including
+# without limitation the rights to use, copy, modify, merge, publish,
+# distribute, sublicense, and/or sell copies of the Software, and to
+# permit persons to whom the Software is furnished to do so, subject to
+# the following conditions:
+#
+# The above copyright notice and this permission notice shall be
+# included in all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+# EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+# MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+# NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+# LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+# OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+# WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+set -e
+set -u
+
+CONFFILE=/etc/dsa/postgresql-backup/sshkeys-sources
+OUTFILE=/etc/ssh/userkeys/debbackup
+HEAD=/etc/dsa/postgresql-backup/sshkeys-local
+
+: > "${OUTFILE}.new"
+
+if [ -e "$HEAD" ] ; then
+	echo "# $HEAD" >> "${OUTFILE}.new"
+	cat "$HEAD" >> "${OUTFILE}.new"
+	echo "# end of $HEAD" >> "${OUTFILE}.new"
+	echo "" >> "${OUTFILE}.new"
+fi
+
+egrep -v '^(#|$)' "$CONFFILE" |
+	while read host ipaddr key; do
+
+	if [[ "$host" =~ [^a-z0-9A-Z_-] ]]; then
+		echo >&2 "Invalid hostname $host"
+		continue
+	fi
+	if [[ "$ipaddr" =~ [^0-9a-fA-F:.,] ]]; then
+		echo >&2 "Invalid ipaddr $ipaddr"
+		continue
+	fi
+
+	echo "command=\"/usr/local/bin/debbackup-ssh-wrap $host\",from=\"$ipaddr\",restrict $key" >> "${OUTFILE}.new"
+done
+
+mv "${OUTFILE}.new" ${OUTFILE}
+# vim:syn=sh:

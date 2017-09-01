@@ -18,8 +18,21 @@ class salsa::database inherits salsa {
 		require => Class['postgresql::server::contrib'],
 	}
 
+	include postgres::backup_source
 	$datadir = assert_type(String[1], $postgresql::params::datadir)
+	warning("foo ")
 	file { "${datadir}/.nobackup":
 		content  => ""
+	}
+	if $::postgresql_key {
+		$ipaddr = assert_type(String[1], join(getfromhash($site::nodeinfo, 'ldap', 'ipHostNumber'), ","))
+
+		@@concat::fragment { "onion::balance::instance::dsa-snippet::$name::$fqdn":
+			target  => "/etc/dsa/postgresql-backup/sshkeys-sources",
+			content  => @("EOF"),
+					${::hostname} ${ipaddr} ${::postgresql_key}
+					| EOF
+			tag     => "postgresql::server::backup-source-sshkey",
+		}
 	}
 }
