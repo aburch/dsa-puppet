@@ -4,6 +4,8 @@ define vsftpd::site (
 	$chown_user='',
 	$writable=false,
 	$writable_other=false,
+	$readable=true,
+	$listable=true,
 	$banner="${name} FTP Server",
 	$max_clients=100,
 	$logfile="/var/log/ftp/vsftpd-${name}.debian.org.log",

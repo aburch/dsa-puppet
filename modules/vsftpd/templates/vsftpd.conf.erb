@@ -16,6 +16,12 @@ chown_username=<%= scope.lookupvar('chown_user') %>
 anon_other_write_enable=YES
 delete_failed_uploads=YES
 <%- end -%>
+<%- if not scope.lookupvar('readable') -%>
+download_enable=NO
+<%- end -%>
+<%- if not scope.lookupvar('listable') -%>
+dirlist_enable=NO
+<%- end -%>
 
 xferlog_enable=YES
 xferlog_file=<%= scope.lookupvar('logfile') %>

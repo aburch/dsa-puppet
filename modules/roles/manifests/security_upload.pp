@@ -10,6 +10,8 @@ class roles::security_upload {
 		banner     => 'ftp.security.upload.debian.org FTP server',
 		logfile    => '/var/log/ftp/vsftpd-security.upload.debian.org.log',
 		writable   => true,
+		readable   => false,
+		listable   => false,
 		chown_user => dak-unpriv,
 		root       => '/srv/security.upload.debian.org/ftp',
 	}
