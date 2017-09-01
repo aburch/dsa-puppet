@@ -23,6 +23,7 @@ override-change : bogusmx.rfc-ignorant.org/$sender_address_domain : dsn.rfc-igno
 partners : bogusmx.rfc-ignorant.org/$sender_address_domain : dsn.rfc-ignorant.org/$sender_address_domain
 preinstallvendors : bogusmx.rfc-ignorant.org/$sender_address_domain : dsn.rfc-ignorant.org/$sender_address_domain
 press : bogusmx.rfc-ignorant.org/$sender_address_domain : dsn.rfc-ignorant.org/$sender_address_domain
+salsa-admin : bogusmx.rfc-ignorant.org/$sender_address_domain : dsn.rfc-ignorant.org/$sender_address_domain
 wat : bogusmx.rfc-ignorant.org/$sender_address_domain : dsn.rfc-ignorant.org/$sender_address_domain
 wbadm : bogusmx.rfc-ignorant.org/$sender_address_domain : dsn.rfc-ignorant.org/$sender_address_domain
 webmaster : bogusmx.rfc-ignorant.org/$sender_address_domain : dsn.rfc-ignorant.org/$sender_address_domain

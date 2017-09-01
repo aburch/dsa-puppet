@@ -28,6 +28,7 @@ planet : zen.spamhaus.org : dul.dnsbl.sorbs.net : combined.njabl.org
 preinstallvendors : zen.spamhaus.org : dul.dnsbl.sorbs.net : bl.spamcop.net
 press: zen.spamhaus.org : dul.dnsbl.sorbs.net
 rmurray : sbl-xbl.spamhaus.org
+salsa-admin : zen.spamhaus.org : dul.dnsbl.sorbs.net : combined.njabl.org
 security: zen.spamhaus.org : dul.dnsbl.sorbs.net : combined.njabl.org
 treasurer : sbl-xbl.spamhaus.org
 wat : zen.spamhaus.org : dul.dnsbl.sorbs.net : combined.njabl.org
