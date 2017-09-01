@@ -28,6 +28,10 @@ class postgres::backup_server {
 		mode   => '0555',
 		notify  => Exec['postgres-make-backup-sshauthkeys'],
 	}
+	file { '/etc/dsa/postgresql-backup/sshkeys-manual':
+		content => template('postgres/backup_server/sshkeys-manual.erb'),
+		notify  => Exec['postgres-make-backup-sshauthkeys'],
+	}
 	concat { '/etc/dsa/postgresql-backup/sshkeys-sources':
 		notify  => Exec['postgres-make-backup-sshauthkeys'],
 	}
